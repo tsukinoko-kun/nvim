@@ -56,6 +56,7 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig") -- easily configure language servers
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("p00f/clangd_extensions.nvim") -- additional functionality for clangd server (e.g. rename file & update imports)
 	use("simrat39/rust-tools.nvim") -- additional functionality for rust server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 	use({
