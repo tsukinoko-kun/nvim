@@ -2,6 +2,7 @@ local opt = vim.opt
 
 -- timeout
 opt.timeoutlen = 500
+opt.timeout = true
 
 -- line numbers
 opt.relativenumber = true

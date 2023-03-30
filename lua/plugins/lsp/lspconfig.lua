@@ -20,6 +20,8 @@ local km = vim.keymap
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
+	print("LSP " .. client.name .. " attached")
+
 	-- keybind options
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -38,13 +40,18 @@ local on_attach = function(client, bufnr)
 	km.set("n", "<leader>lgd", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 	km.set("n", "<leader>lf", vim.lsp.buf.formatting, opts) -- format file
 	km.set("n", "<leader>lF", vim.lsp.buf.range_formatting, opts) -- format selection
-	km.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+	km.set("n", "K", vim.lsp.buf.hover, opts) -- show document symbols
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
 		km.set("n", "<leader>lrf", ":TypescriptRenameFile<CR>") -- rename file and update imports
 		km.set("n", "<leader>loi", ":TypescriptOrganizeImports<CR>") -- organize imports
 		km.set("n", "<leader>lru", ":TypescriptRemoveUnused<CR>") -- remove unused variables
+	end
+
+	-- c / c++ specific keymaps (e.g. toggle header/source)
+	if client.name == "clangd" then
+		km.set("n", "gh", ":ClangdSwitchSourceHeader<CR>") -- toggle header/source
 	end
 end
 
@@ -111,6 +118,7 @@ lspconfig["lua_ls"].setup({
 lspconfig["rust_analyzer"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	cmd = { "rustup", "run", "stable", "rust-analyzer" },
 	settings = {
 		["rust-analyzer"] = {
 			root_dir = lspconfig.util.root_pattern("Cargo.toml"),
@@ -127,6 +135,102 @@ lspconfig["rust_analyzer"].setup({
 		},
 	},
 })
+
+local rusttools = require("rust-tools")
+
+local opts = {
+	tools = { -- rust-tools options
+		-- Automatically set inlay hints (type hints)
+		autoSetHints = true,
+
+		-- Whether to show hover actions inside the hover window
+		-- This overrides the default hover handler
+		-- hover_with_actions = true,
+
+		runnables = {
+			-- whether to use telescope for selection menu or not
+			use_telescope = true,
+
+			-- rest of the opts are forwarded to telescope
+		},
+
+		debuggables = {
+			-- whether to use telescope for selection menu or not
+			use_telescope = true,
+
+			-- rest of the opts are forwarded to telescope
+		},
+
+		-- These apply to the default RustSetInlayHints command
+		inlay_hints = {
+
+			-- Only show inlay hints for the current line
+			only_current_line = false,
+
+			-- Event which triggers a refersh of the inlay hints.
+			-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+			-- not that this may cause  higher CPU usage.
+			-- This option is only respected when only_current_line and
+			-- autoSetHints both are true.
+			only_current_line_autocmd = "CursorHold",
+
+			-- wheter to show parameter hints with the inlay hints or not
+			show_parameter_hints = true,
+
+			-- prefix for parameter hints
+			parameter_hints_prefix = "<- ",
+
+			-- prefix for all the other hints (type, chaining)
+			other_hints_prefix = "=> ",
+
+			-- whether to align to the length of the longest line in the file
+			max_len_align = false,
+
+			-- padding from the left if max_len_align is true
+			max_len_align_padding = 1,
+
+			-- whether to align to the extreme right or not
+			right_align = false,
+
+			-- padding from the right if right_align is true
+			right_align_padding = 7,
+
+			-- The color of the hints
+			highlight = "Comment",
+		},
+
+		-- settings for showing the crate graph based on graphviz and the dot
+		-- command
+		crate_graph = {
+			-- Backend used for displaying the graph
+			-- see: https://graphviz.org/docs/outputs/
+			-- default: x11
+			backend = "x11",
+			-- where to store the output, nil for no output stored (relative
+			-- path from pwd)
+			-- default: nil
+			output = nil,
+			-- true for all crates.io and external crates, false only the local
+			-- crates
+			-- default: true
+			full = true,
+		},
+	},
+	server = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	},
+	dap = {
+		adapter = {
+			type = "executable",
+			command = "lldb-vscode",
+			name = "rt_lldb",
+		},
+	},
+}
+
+rusttools.setup(opts)
+rusttools.inlay_hints.enable()
 
 -- configure astro server
 lspconfig["astro"].setup({
@@ -158,6 +262,74 @@ lspconfig["clangd"].setup({
 				or lspconfig.util.path.dirname,
 			filetypes = { "c", "h", "hpp", "cpp", "cpi", "objc", "objcpp" },
 			single_file_support = true,
+		},
+	},
+})
+
+require("clangd_extensions").setup({
+	server = { capabilities = capabilities, on_attach = on_attach },
+	extensions = {
+		-- defaults:
+		-- Automatically set inlay hints (type hints)
+		autoSetHints = true,
+		-- These apply to the default ClangdSetInlayHints command
+		inlay_hints = {
+			-- Only show inlay hints for the current line
+			only_current_line = false,
+			-- Event which triggers a refersh of the inlay hints.
+			-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+			-- not that this may cause  higher CPU usage.
+			-- This option is only respected when only_current_line and
+			-- autoSetHints both are true.
+			only_current_line_autocmd = "CursorHold",
+			-- whether to show parameter hints with the inlay hints or not
+			show_parameter_hints = true,
+			-- prefix for parameter hints
+			parameter_hints_prefix = "<- ",
+			-- prefix for all the other hints (type, chaining)
+			other_hints_prefix = "=> ",
+			-- whether to align to the length of the longest line in the file
+			max_len_align = false,
+			-- padding from the left if max_len_align is true
+			max_len_align_padding = 1,
+			-- whether to align to the extreme right or not
+			right_align = false,
+			-- padding from the right if right_align is true
+			right_align_padding = 7,
+			-- The color of the hints
+			highlight = "Comment",
+			-- The highlight group priority for extmark
+			priority = 100,
+		},
+		ast = {
+			role_icons = {
+				type = "",
+				declaration = "",
+				expression = "",
+				specifier = "",
+				statement = "",
+				["template argument"] = "",
+			},
+
+			kind_icons = {
+				Compound = "",
+				Recovery = "",
+				TranslationUnit = "",
+				PackExpansion = "",
+				TemplateTypeParm = "",
+				TemplateTemplateParm = "",
+				TemplateParamObject = "",
+			},
+
+			highlights = {
+				detail = "Comment",
+			},
+		},
+		memory_usage = {
+			border = "none",
+		},
+		symbol_info = {
+			border = "none",
 		},
 	},
 })

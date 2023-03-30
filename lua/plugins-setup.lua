@@ -79,7 +79,16 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-nvim-lua")
-	use("liuchengxu/vim-which-key") -- for showing keybindings
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine
