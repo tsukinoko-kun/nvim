@@ -44,6 +44,7 @@ mason_null_ls.setup({
 		"eslint_d", -- ts/js linter
 		"markdownlint", -- markdown linter
 		"sumneko_lua", -- lua linter
+		"clang-format", -- c, c++, objc formatter
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,

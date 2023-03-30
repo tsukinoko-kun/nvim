@@ -108,10 +108,40 @@ lspconfig["lua_ls"].setup({
 lspconfig["rust_analyzer"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	settings = {
+		["rust-analyzer"] = {
+			assist = {
+				importGranularity = "module",
+				importPrefix = "by_self",
+			},
+			cargo = {
+				loadOutDirsFromCheck = true,
+			},
+			procMacro = {
+				enable = true,
+			},
+		},
+	},
 })
 
 -- configure astro server
 lspconfig["astro"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	settings = {
+		astro = {
+			enable = true,
+		},
+	},
+})
+
+-- configure c/c++ server
+lspconfig["clangd"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		clangd = {
+			compileCommandsDir = "build",
+		},
+	},
 })

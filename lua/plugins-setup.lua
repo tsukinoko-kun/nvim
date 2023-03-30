@@ -24,7 +24,8 @@ return packer.startup(function(use)
 
 	-- My plugins here
 
-	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
+	use("EdenEast/nightfox.nvim") -- preferred colorscheme
+	use("ericbn/vim-relativize") -- relative line numbers
 	use("numToStr/Comment.nvim") -- commenting with gc
 
 	use("nvim-tree/nvim-tree.lua") -- file explorer
