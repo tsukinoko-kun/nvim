@@ -20,12 +20,14 @@ return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	use("nvim-lua/plenary.nvim")
+	use("nvim-lua/popup.nvim")
 
 	-- My plugins here
+
 	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
 	use("numToStr/Comment.nvim") -- commenting with gc
 
-	use("nvim-tree/nvim-tree.lua") -- vs-code like icons
+	use("nvim-tree/nvim-tree.lua") -- file explorer
 	use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
 	use("nvim-lualine/lualine.nvim") -- statusline
@@ -33,6 +35,7 @@ return packer.startup(function(use)
 	-- fuzzy finding w/ telescope
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
+	use({ "nvim-telescope/telescope-ui-select.nvim" }) -- for showing lsp code actions
 
 	-- autocomplete
 	use("hrsh7th/nvim-cmp")
@@ -51,16 +54,15 @@ return packer.startup(function(use)
 	-- configuring lsp servers
 	use("neovim/nvim-lspconfig") -- easily configure language servers
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		requires = {
-			{ "nvim-tree/nvim-web-devicons" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	}) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("simrat39/rust-tools.nvim") -- additional functionality for rust server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+	use({
+		"smjonas/inc-rename.nvim",
+		config = function()
+			require("inc_rename").setup()
+		end,
+	})
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim")
@@ -84,8 +86,6 @@ return packer.startup(function(use)
 
 	use("github/copilot.vim")
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
 	if packer_bootstrap then
 		require("packer").sync()
 	end
