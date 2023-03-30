@@ -89,7 +89,8 @@ lspconfig["emmet_ls"].setup({
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	settings = { -- custom settings for lua
+	settings = {
+		-- custom settings for lua
 		Lua = {
 			-- make the language server recognize "vim" global
 			diagnostics = {
@@ -112,6 +113,7 @@ lspconfig["rust_analyzer"].setup({
 	on_attach = on_attach,
 	settings = {
 		["rust-analyzer"] = {
+			root_dir = lspconfig.util.root_pattern("Cargo.toml"),
 			assist = {
 				importGranularity = "module",
 				importPrefix = "by_self",
@@ -133,6 +135,14 @@ lspconfig["astro"].setup({
 	settings = {
 		astro = {
 			enable = true,
+			root_dir = lspconfig.util.root_pattern(
+				"astro.config.mjs",
+				"astro.config.js",
+				"astro.config.cjs",
+				"package.json",
+				"node_modules",
+				".git"
+			) or lspconfig.util.path.dirname,
 		},
 	},
 })
@@ -144,6 +154,10 @@ lspconfig["clangd"].setup({
 	settings = {
 		clangd = {
 			compileCommandsDir = "build",
+			root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
+				or lspconfig.util.path.dirname,
+			filetypes = { "c", "h", "hpp", "cpp", "cpi", "objc", "objcpp" },
+			single_file_support = true,
 		},
 	},
 })

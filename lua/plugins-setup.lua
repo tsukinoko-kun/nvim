@@ -31,6 +31,42 @@ return packer.startup(function(use)
 	use("nvim-tree/nvim-tree.lua") -- file explorer
 	use("nvim-tree/nvim-web-devicons") -- vs-code like icons
 
+	use({
+		"glepnir/dashboard-nvim",
+		event = "VimEnter",
+		config = function()
+			require("dashboard").setup({
+				theme = "hyper",
+				shortcut_type = "number",
+				config = {
+					week_header = {
+						enable = true,
+					},
+					shortcut = {
+						{ desc = " Update", group = "@property", action = "PackerSync", key = "u" },
+						{
+							icon = " ",
+							icon_hl = "@variable",
+							desc = "Files",
+							group = "Label",
+							action = "Telescope find_files",
+							key = "f",
+						},
+						{
+							icon = " ",
+							icon_hl = "@error",
+							desc = "Quit",
+							group = "Label",
+							action = "quit",
+							key = "q",
+						},
+					},
+				},
+			})
+		end,
+		requires = { "nvim-tree/nvim-web-devicons" },
+	})
+
 	use("nvim-lualine/lualine.nvim") -- statusline
 
 	-- fuzzy finding w/ telescope
@@ -42,6 +78,8 @@ return packer.startup(function(use)
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-nvim-lua")
+	use("liuchengxu/vim-which-key") -- for showing keybindings
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") -- snippet engine

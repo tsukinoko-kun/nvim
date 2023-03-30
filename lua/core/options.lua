@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- timeout
+opt.timeoutlen = 500
+
 -- line numbers
 opt.relativenumber = true
 opt.number = true
