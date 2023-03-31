@@ -13,13 +13,32 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	-- setup formatters & linters
 	sources = {
-		formatting.prettier, -- js/ts formatter
+		formatting.prettier.with({
+			-- only if no eslint config file is present (to avoid conflicts)
+			condition = function(utils)
+				return not utils.root_has_file(".eslintrc.js")
+					and not utils.root_has_file(".eslintrc.cjs")
+					and not utils.root_has_file(".eslintrc.yaml")
+					and not utils.root_has_file(".eslintrc.yml")
+					and not utils.root_has_file(".eslintrc.json")
+			end,
+		}), -- js/ts formatter
 		formatting.stylua, -- lua formatter
 		formatting.clang_format, -- c/c++ formatter
 		formatting.rustfmt, -- rust formatter
-		diagnostics.eslint_d.with({ -- js/ts linter
-			-- only enable eslint if root has .eslintrc
+		formatting.eslint_d.with({ -- js/ts linter
 			condition = function(utils)
+				-- only if eslint config file is present
+				return utils.root_has_file(".eslintrc.js")
+					or utils.root_has_file(".eslintrc.cjs")
+					or utils.root_has_file(".eslintrc.yaml")
+					or utils.root_has_file(".eslintrc.yml")
+					or utils.root_has_file(".eslintrc.json")
+			end,
+		}),
+		diagnostics.eslint_d.with({ -- js/ts linter
+			condition = function(utils)
+				-- only if eslint config file is present
 				return utils.root_has_file(".eslintrc.js")
 					or utils.root_has_file(".eslintrc.cjs")
 					or utils.root_has_file(".eslintrc.yaml")
