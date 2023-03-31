@@ -24,6 +24,7 @@ opt.smartcase = true
 
 -- cursor line
 opt.cursorline = true
+opt.scrolloff = 8
 
 -- appearance
 opt.termguicolors = true
@@ -40,5 +41,6 @@ opt.clipboard:append("unnamedplus")
 opt.splitright = true
 opt.splitbelow = true
 
+-- keywords
 opt.iskeyword:append("-")
 opt.iskeyword:append("_")
