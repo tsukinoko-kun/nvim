@@ -20,6 +20,22 @@ km.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
 km.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 km.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
+-- harpoon
+km.set("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>")
+km.set("n", "<leader>hc", "<cmd>lua require('harpoon.mark').clear_all()<cr>")
+km.set("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>")
+km.set("n", "<leader>hj", '<cmd>lua require("harpoon.ui").nav_next()<cr>')
+km.set("n", "<leader>hk", '<cmd>lua require("harpoon.ui").nav_prev()<cr>')
+km.set("n", "<leader>h1", '<cmd>lua require("harpoon.ui").nav_file(1)<cr>')
+km.set("n", "<leader>h2", '<cmd>lua require("harpoon.ui").nav_file(2)<cr>')
+km.set("n", "<leader>h3", '<cmd>lua require("harpoon.ui").nav_file(3)<cr>')
+km.set("n", "<leader>h4", '<cmd>lua require("harpoon.ui").nav_file(4)<cr>')
+km.set("n", "<leader>h5", '<cmd>lua require("harpoon.ui").nav_file(5)<cr>')
+km.set("n", "<leader>h6", '<cmd>lua require("harpoon.ui").nav_file(6)<cr>')
+km.set("n", "<leader>h7", '<cmd>lua require("harpoon.ui").nav_file(7)<cr>')
+km.set("n", "<leader>h8", '<cmd>lua require("harpoon.ui").nav_file(8)<cr>')
+km.set("n", "<leader>h9", '<cmd>lua require("harpoon.ui").nav_file(9)<cr>')
+
 -- increment/decrement numbers
 km.set("n", "<leader>+", "<C-a>")
 km.set("n", "<leader>-", "<C-x>")
