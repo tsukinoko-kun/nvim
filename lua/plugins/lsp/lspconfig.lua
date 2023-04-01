@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
 	km.set("n", "<leader>ld", vim.diagnostic.open_float, opts) -- show diagnostics for line
 	km.set("n", "<leader>lgD", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 	km.set("n", "<leader>lgd", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-	km.set("n", "<leader>lf", vim.lsp.buf.formatting, opts) -- format file
+	km.set("n", "<leader>lf", vim.lsp.buf.format, opts) -- format file
 	km.set("n", "<leader>lF", vim.lsp.buf.range_formatting, opts) -- format selection
 	km.set("n", "K", vim.lsp.buf.hover, opts) -- show document symbols
 
