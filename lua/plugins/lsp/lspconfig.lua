@@ -20,7 +20,9 @@ local km = vim.keymap
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-	print("LSP " .. client.name .. " attached")
+	if client.name ~= "null-ls" then
+		print("LSP " .. client.name .. " attached")
+	end
 
 	-- keybind options
 	local opts = { noremap = true, silent = true, buffer = bufnr }
