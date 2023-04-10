@@ -88,11 +88,11 @@ lspconfig["cssls"].setup({
 })
 
 -- configure emmet language server
-lspconfig["emmet_ls"].setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "astro" },
-})
+-- lspconfig["emmet_ls"].setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "astro" },
+-- })
 
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
@@ -240,15 +240,20 @@ lspconfig["astro"].setup({
 	on_attach = on_attach,
 	settings = {
 		astro = {
-			enable = true,
+			cmd = { "astro-ls", "--stdio" },
+			filetypes = { "astro" },
+			init_options = {
+				configuration = {},
+				typescript = {
+					serverPath = "",
+				},
+			},
 			root_dir = lspconfig.util.root_pattern(
 				"astro.config.mjs",
 				"astro.config.js",
 				"astro.config.cjs",
-				"package.json",
-				"node_modules",
-				".git"
-			) or lspconfig.util.path.dirname,
+				"package.json"
+			),
 		},
 	},
 })

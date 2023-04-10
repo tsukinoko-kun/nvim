@@ -26,7 +26,8 @@ mason_lspconfig.setup({
 		"html", -- html
 		"cssls", -- css, scss, less
 		"lua_ls", -- lua
-		"emmet_ls", -- html, css, js, jsx, ts, tsx
+		"jsonls", -- json
+		-- "emmet_ls", -- html, css, js, jsx, ts, tsx
 		"marksman", -- markdown
 		"yamlls", -- yaml
 		"lemminx", -- xml
@@ -42,6 +43,7 @@ mason_null_ls.setup({
 		"prettier", -- ts/js formatter
 		"stylua", -- lua formatter
 		"eslint_d", -- ts/js linter
+		"jsonlint", -- json linter
 		"markdownlint", -- markdown linter
 		"sumneko_lua", -- lua linter
 		"clang-format", -- c, c++, objc formatter

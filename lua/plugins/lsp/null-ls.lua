@@ -14,15 +14,9 @@ null_ls.setup({
 	-- setup formatters & linters
 	sources = {
 		formatting.prettier.with({
-			-- only if no eslint config file is present (to avoid conflicts)
-			condition = function(utils)
-				return not utils.root_has_file(".eslintrc.js")
-					and not utils.root_has_file(".eslintrc.cjs")
-					and not utils.root_has_file(".eslintrc.yaml")
-					and not utils.root_has_file(".eslintrc.yml")
-					and not utils.root_has_file(".eslintrc.json")
-			end,
-		}), -- js/ts formatter
+			-- indent size 4 spaces, trailing comma
+			extra_args = { "--tab-width", "4", "--trailing-comma", "all" },
+		}),
 		formatting.stylua, -- lua formatter
 		formatting.clang_format, -- c/c++ formatter
 		formatting.rustfmt, -- rust formatter
@@ -46,6 +40,7 @@ null_ls.setup({
 					or utils.root_has_file(".eslintrc.json")
 			end,
 		}),
+		diagnostics.jsonlint, -- json
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)

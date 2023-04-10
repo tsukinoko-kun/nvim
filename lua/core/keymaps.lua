@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 
 local km = vim.keymap
 
-km.set("i", "<C-w>", "<C-\\><C-o>:wa<CR>")
-km.set("n", "<C-w>", ":wa<CR>")
+km.set("i", "<C-w>", "<C-\\><C-o>:wa!<CR>")
+km.set("n", "<C-w>", ":wa!<CR>")
 km.set("i", "<C-q>", "<C-o>:qa<CR>")
 km.set("n", "<C-q>", ":qa<CR>")
 km.set("n", "x", '"_x"')

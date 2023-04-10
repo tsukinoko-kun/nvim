@@ -27,6 +27,7 @@ return packer.startup(function(use)
 	use("EdenEast/nightfox.nvim") -- preferred colorscheme
 	use("ericbn/vim-relativize") -- relative line numbers
 	use("numToStr/Comment.nvim") -- commenting with gc
+	use("gpanders/editorconfig.nvim") -- editorconfig support
 
 	use("nvim-tree/nvim-tree.lua") -- file explorer
 	use("nvim-tree/nvim-web-devicons") -- vs-code like icons
@@ -127,6 +128,7 @@ return packer.startup(function(use)
 			ts_update()
 		end,
 	})
+	use("norcalli/nvim-colorizer.lua") -- colorize hex codes
 
 	-- auto closing
 	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
