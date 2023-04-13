@@ -42,7 +42,7 @@ local on_attach = function(client, bufnr)
 	km.set("n", "<leader>lgd", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 	km.set("n", "<leader>lf", vim.lsp.buf.format, opts) -- format file
 	km.set("n", "<leader>lF", vim.lsp.buf.range_formatting, opts) -- format selection
-	km.set("n", "K", vim.lsp.buf.hover, opts) -- show document symbols
+	km.set("n", "K", vim.lsp.buf.hover, opts) -- show hover
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
