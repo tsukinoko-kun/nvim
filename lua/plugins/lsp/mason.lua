@@ -27,7 +27,6 @@ mason_lspconfig.setup({
 		"cssls", -- css, scss, less
 		"lua_ls", -- lua
 		"jsonls", -- json
-		-- "emmet_ls", -- html, css, js, jsx, ts, tsx
 		"marksman", -- markdown
 		"yamlls", -- yaml
 		"lemminx", -- xml
