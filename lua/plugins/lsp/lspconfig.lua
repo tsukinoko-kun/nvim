@@ -241,12 +241,12 @@ lspconfig["astro"].setup({
 					serverPath = "",
 				},
 			},
-			root_dir = lspconfig.util.root_pattern(
-				"astro.config.mjs",
-				"astro.config.js",
-				"astro.config.cjs",
-				"package.json"
-			),
+			-- root_dir = lspconfig.util.root_pattern(
+			-- 	"astro.config.mjs",
+			-- 	"astro.config.js",
+			-- 	"astro.config.cjs",
+			-- 	"package.json"
+			-- ),
 		},
 	},
 })
