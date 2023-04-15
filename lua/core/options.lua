@@ -47,4 +47,8 @@ opt.iskeyword:append("-")
 opt.iskeyword:append("_")
 
 -- set language
-vim.cmd("lang en_US")
+if not pcall(function()
+	vim.cmd("lang en_US")
+end) then
+	print("Failed to set language to en_US")
+end
