@@ -1,63 +1,63 @@
 vim.g.mapleader = " "
 
-local km = vim.keymap
+local function map(mode, lhs, rhs, opts)
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
+end
 
-km.set("i", "<C-w>", "<C-\\><C-o>:wa!<CR>")
-km.set("n", "<C-w>", ":wa!<CR>")
-km.set("i", "<C-q>", "<C-o>:qa<CR>")
-km.set("n", "<C-q>", ":qa<CR>")
-km.set("n", "x", '"_x"')
-km.set("v", "d", '"_x"<esc>')
+map("i", "<C-w>", "<C-\\><C-o>:wa!<CR>", { desc = "Write all buffers" })
+map("n", "<C-w>", ":wa!<CR>", { desc = "Write all buffers" })
+map("i", "<C-q>", "<C-o>:qa<CR>", { desc = "Quit all buffers" })
+map("n", "<C-q>", ":qa<CR>", { desc = "Quit all buffers" })
+map("v", "d", '"_x"<esc>', { desc = "Delete without yanking" })
 
 -- explorer
-km.set("n", "<leader>e", ":NvimTreeToggle<CR>")
-km.set("n", "<leader>o", ":NvimTreeFocus<CR>")
+map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+map("n", "<leader>o", ":NvimTreeFocus<CR>", { desc = "Focus file explorer" })
 
 -- telescope
-km.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-km.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>")
-km.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
-km.set("n", "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
-km.set("n", "<leader>fB", "<cmd>Telescope buffers<cr>")
-km.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
-
--- neoclip
-km.set("n", "<leader>p", "<cmd>Telescope neoclip<cr>")
-
--- zoxide
-km.set("n", "<leader>zl", "<cmd>Telescope zoxide list<cr>")
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files" })
+map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Fuzzy search in files" })
+map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "grep find in files" })
+map("n", "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Fuzzy search current buffer" })
+map("n", "<leader>fB", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy search buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Fuzzy search help tags" })
+map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", { desc = "Fuzzy search clipboard history" })
+map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Fuzzy search zoxide history" })
 
 -- harpoon
-km.set("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>")
-km.set("n", "<leader>hc", "<cmd>lua require('harpoon.mark').clear_all()<cr>")
-km.set("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>")
-km.set("n", "<leader>hj", '<cmd>lua require("harpoon.ui").nav_next()<cr>')
-km.set("n", "<leader>hk", '<cmd>lua require("harpoon.ui").nav_prev()<cr>')
-km.set("n", "<leader>h1", '<cmd>lua require("harpoon.ui").nav_file(1)<cr>')
-km.set("n", "<leader>h2", '<cmd>lua require("harpoon.ui").nav_file(2)<cr>')
-km.set("n", "<leader>h3", '<cmd>lua require("harpoon.ui").nav_file(3)<cr>')
-km.set("n", "<leader>h4", '<cmd>lua require("harpoon.ui").nav_file(4)<cr>')
-km.set("n", "<leader>h5", '<cmd>lua require("harpoon.ui").nav_file(5)<cr>')
-km.set("n", "<leader>h6", '<cmd>lua require("harpoon.ui").nav_file(6)<cr>')
-km.set("n", "<leader>h7", '<cmd>lua require("harpoon.ui").nav_file(7)<cr>')
-km.set("n", "<leader>h8", '<cmd>lua require("harpoon.ui").nav_file(8)<cr>')
-km.set("n", "<leader>h9", '<cmd>lua require("harpoon.ui").nav_file(9)<cr>')
+map("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Fuzzy search Harpoon marks" })
+map("n", "<leader>hc", "<cmd>lua require('harpoon.mark').clear_all()<cr>", { desc = "Clear all Harpoon marks" })
+map("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Add file to Harpoon" })
+map("n", "<leader>hj", '<cmd>lua require("harpoon.ui").nav_next()<cr>', { desc = "Navigate to next Harpoon mark" })
+map("n", "<leader>hk", '<cmd>lua require("harpoon.ui").nav_prev()<cr>', { desc = "Navigate to previous Harpoon mark" })
+map("n", "<leader>h1", '<cmd>lua require("harpoon.ui").nav_file(1)<cr>', { desc = "Navigate to Harpoon mark 1" })
+map("n", "<leader>h2", '<cmd>lua require("harpoon.ui").nav_file(2)<cr>', { desc = "Navigate to Harpoon mark 2" })
+map("n", "<leader>h3", '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', { desc = "Navigate to Harpoon mark 3" })
+map("n", "<leader>h4", '<cmd>lua require("harpoon.ui").nav_file(4)<cr>', { desc = "Navigate to Harpoon mark 4" })
+map("n", "<leader>h5", '<cmd>lua require("harpoon.ui").nav_file(5)<cr>', { desc = "Navigate to Harpoon mark 5" })
+map("n", "<leader>h6", '<cmd>lua require("harpoon.ui").nav_file(6)<cr>', { desc = "Navigate to Harpoon mark 6" })
+map("n", "<leader>h7", '<cmd>lua require("harpoon.ui").nav_file(7)<cr>', { desc = "Navigate to Harpoon mark 7" })
+map("n", "<leader>h8", '<cmd>lua require("harpoon.ui").nav_file(8)<cr>', { desc = "Navigate to Harpoon mark 8" })
+map("n", "<leader>h9", '<cmd>lua require("harpoon.ui").nav_file(9)<cr>', { desc = "Navigate to Harpoon mark 9" })
 
 -- increment/decrement numbers
-km.set("n", "<leader>+", "<C-a>")
-km.set("n", "<leader>-", "<C-x>")
+map("n", "<leader>+", "<C-a>", { desc = "Increment number" })
+map("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
 
 -- split window
-km.set("n", "<leader>sv", "<C-w>v")
-km.set("n", "<leader>sh", "<C-w>s")
+map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 
 -- Prime
-km.set("v", "J", ":m '>+1<CR>gv=gv")
-km.set("v", "K", ":m '<-2<CR>gv=gv")
-km.set("n", "J", "mzJ`z")
-km.set("n", "<C-d>", "<C-d>zz")
-km.set("n", "<C-u>", "<C-u>zz")
-km.set("x", "<leader>p", '"_dP')
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected line up" })
+map("n", "J", "mzJ`z", { desc = "Move current line down" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 
 --vim.o.copilot_no_tab = true
 --vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
