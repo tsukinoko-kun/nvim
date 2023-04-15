@@ -24,6 +24,7 @@ return packer.startup(function(use)
 
 	-- My plugins here
 
+	use({ "kkharji/sqlite.lua" }) -- sqlite3 for lua
 	use("EdenEast/nightfox.nvim") -- preferred colorscheme
 	use("ericbn/vim-relativize") -- relative line numbers
 	use("numToStr/Comment.nvim") -- commenting with gc
@@ -74,8 +75,25 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 	use({ "nvim-telescope/telescope-ui-select.nvim" }) -- for showing lsp code actions
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "kkharji/sqlite.lua", module = "sqlite" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+	})
 
 	use("ThePrimeagen/harpoon") -- for managing multiple buffers
+
+	use({
+		"jvgrootveld/telescope-zoxide",
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+	}) -- zoxide integration
 
 	-- autocomplete
 	use("hrsh7th/nvim-cmp")
@@ -137,7 +155,12 @@ return packer.startup(function(use)
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
-	use("github/copilot.vim")
+	use({
+		"github/copilot.vim",
+		config = function()
+			vim.g.copilot_enabled = 1
+		end,
+	})
 
 	if packer_bootstrap then
 		require("packer").sync()

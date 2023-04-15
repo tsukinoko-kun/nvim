@@ -21,6 +21,12 @@ km.set("n", "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 km.set("n", "<leader>fB", "<cmd>Telescope buffers<cr>")
 km.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 
+-- neoclip
+km.set("n", "<leader>p", "<cmd>Telescope neoclip<cr>")
+
+-- zoxide
+km.set("n", "<leader>zl", "<cmd>Telescope zoxide list<cr>")
+
 -- harpoon
 km.set("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>")
 km.set("n", "<leader>hc", "<cmd>lua require('harpoon.mark').clear_all()<cr>")
