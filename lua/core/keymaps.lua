@@ -18,6 +18,18 @@ map("v", "d", '"_x"<esc>', { desc = "Delete without yanking" })
 map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 map("n", "<leader>o", ":NvimTreeFocus<CR>", { desc = "Focus file explorer" })
 
+-- git
+map("n", "<leader>gg", ":LazyGit<CR>", { desc = "LazyGit" })
+map("n", "<leader>gp", ":Git pull<CR>", { desc = "Git pull" })
+map("n", "<leader>gP", ":Git push<CR>", { desc = "Git push" })
+map("n", "<leader>gc", ":Git commit -v<CR>", { desc = "Git commit" })
+map("n", "<leader>gb", ":Git branch<CR>", { desc = "Git branch" })
+map("n", "<leader>gs", ":Git status<CR>", { desc = "Git status" })
+map("n", "<leader>gd", ":Git diff<CR>", { desc = "Git diff" })
+map("n", "<leader>gl", ":Git log<CR>", { desc = "Git log" })
+map("n", "<leader>gS", ":Git stash<CR>", { desc = "Git stash" })
+map("n", "<leader>gR", ":Git restore<CR>", { desc = "Git restore" })
+
 -- telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files" })
 map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Fuzzy search in files" })
