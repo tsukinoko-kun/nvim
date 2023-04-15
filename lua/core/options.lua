@@ -45,3 +45,6 @@ opt.splitbelow = true
 -- keywords
 opt.iskeyword:append("-")
 opt.iskeyword:append("_")
+
+-- set language
+vim.cmd("lang en_US")
