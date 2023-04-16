@@ -16,44 +16,45 @@ if not typescript_setup then
 	return
 end
 
-local km = vim.keymap
-
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
 	if client.name ~= "null-ls" then
 		print("LSP " .. client.name .. " attached")
 	end
 
-	-- keybind options
-	local opts = { noremap = true, silent = true, buffer = bufnr }
+	local function map(mode, lhs, rhs, opts)
+		local options = { noremap = true, silent = true , buffer = bufnr}
+		if opts then
+			options = vim.tbl_extend("force", options, opts)
+		end
+		vim.keymap.set(mode, lhs, rhs, options)
+	end
 
 	-- set keybinds
-	km.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-	km.set("n", "gD", vim.lsp.buf.declaration, opts) -- got to declaration
-	km.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- see definition and make edits in window
-	km.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- go to implementation
-	km.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- go to implementation
-	km.set("n", "<leader>la", vim.lsp.buf.code_action, opts) -- see available code actions
-	km.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-	km.set("n", "<leader>lr", ":IncRename ", opts) -- smart rename
-	km.set("n", "<leader>lD", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-	km.set("n", "<leader>ld", vim.diagnostic.open_float, opts) -- show diagnostics for line
-	km.set("n", "<leader>lgD", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-	km.set("n", "<leader>lgd", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-	km.set("n", "<leader>lf", vim.lsp.buf.format, opts) -- format file
-	km.set("n", "<leader>lF", vim.lsp.buf.range_formatting, opts) -- format selection
-	km.set("n", "K", vim.lsp.buf.hover, opts) -- show hover
+	map("n", "gR", "<cmd>Telescope lsp_references<CR>", { desc = "Show references" })
+	map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+	map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Go to definition" })
+	map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementation" })
+	map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
+	map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Show code actions" })
+	map("n", "<leader>lr", ":IncRename ", { desc = "Rename symbol" })
+	map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
+    map("n", "<leader>lD", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show diagnostics for current buffer" })
+	map("n", "<leader>lgD", vim.diagnostic.goto_prev, { desc = "Jump to previous diagnostic" })
+	map("n", "<leader>lgd", vim.diagnostic.goto_next, { desc = "Jump to next diagnostic" })
+	map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
+	map("n", "<leader>lF", vim.lsp.buf.range_formatting, { desc = "Format selection" })
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
-		km.set("n", "<leader>lrf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-		km.set("n", "<leader>loi", ":TypescriptOrganizeImports<CR>") -- organize imports
-		km.set("n", "<leader>lru", ":TypescriptRemoveUnused<CR>") -- remove unused variables
+		map("n", "<leader>lrf", ":TypescriptRenameFile<CR>", { desc = "Rename file and update imports" })
+		map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
+		map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
 	end
 
 	-- c / c++ specific keymaps (e.g. toggle header/source)
 	if client.name == "clangd" then
-		km.set("n", "gh", ":ClangdSwitchSourceHeader<CR>") -- toggle header/source
+		map("n", "gh", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle header/source" })
 	end
 end
 
@@ -134,10 +135,10 @@ lspconfig["rust_analyzer"].setup({
 local rusttools = require("rust-tools")
 
 local opts = {
-	tools = { -- rust-tools options
+	tools = {
+		-- rust-tools options
 		-- Automatically set inlay hints (type hints)
 		autoSetHints = true,
-
 		-- Whether to show hover actions inside the hover window
 		-- This overrides the default hover handler
 		-- hover_with_actions = true,
@@ -145,55 +146,40 @@ local opts = {
 		runnables = {
 			-- whether to use telescope for selection menu or not
 			use_telescope = true,
-
 			-- rest of the opts are forwarded to telescope
 		},
-
 		debuggables = {
 			-- whether to use telescope for selection menu or not
 			use_telescope = true,
-
 			-- rest of the opts are forwarded to telescope
 		},
-
 		-- These apply to the default RustSetInlayHints command
 		inlay_hints = {
-
 			-- Only show inlay hints for the current line
 			only_current_line = false,
-
 			-- Event which triggers a refersh of the inlay hints.
 			-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
 			-- not that this may cause  higher CPU usage.
 			-- This option is only respected when only_current_line and
 			-- autoSetHints both are true.
 			only_current_line_autocmd = "CursorHold",
-
 			-- wheter to show parameter hints with the inlay hints or not
 			show_parameter_hints = true,
-
 			-- prefix for parameter hints
 			parameter_hints_prefix = "<- ",
-
 			-- prefix for all the other hints (type, chaining)
 			other_hints_prefix = "=> ",
-
 			-- whether to align to the length of the longest line in the file
 			max_len_align = false,
-
 			-- padding from the left if max_len_align is true
 			max_len_align_padding = 1,
-
 			-- whether to align to the extreme right or not
 			right_align = false,
-
 			-- padding from the right if right_align is true
 			right_align_padding = 7,
-
 			-- The color of the hints
 			highlight = "Comment",
 		},
-
 		-- settings for showing the crate graph based on graphviz and the dot
 		-- command
 		crate_graph = {
@@ -310,7 +296,6 @@ require("clangd_extensions").setup({
 				statement = "",
 				["template argument"] = "",
 			},
-
 			kind_icons = {
 				Compound = "",
 				Recovery = "",
@@ -320,7 +305,6 @@ require("clangd_extensions").setup({
 				TemplateTemplateParm = "",
 				TemplateParamObject = "",
 			},
-
 			highlights = {
 				detail = "Comment",
 			},

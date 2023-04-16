@@ -8,27 +8,62 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-map("i", "<C-w>", "<C-\\><C-o>:wa!<CR>", { desc = "Write all buffers" })
-map("n", "<C-w>", ":wa!<CR>", { desc = "Write all buffers" })
-map("i", "<C-q>", "<C-o>:qa<CR>", { desc = "Quit all buffers" })
-map("n", "<C-q>", ":qa<CR>", { desc = "Quit all buffers" })
+map("i", "<C-w>", "<cmd>noautocmd wa!<CR>", { desc = "Write all buffers" })
+map("n", "<C-w>", "<cmd>noautocmd wa!<CR>", { desc = "Write all buffers" })
+map("i", "<C-q>", "<cmd>qa<CR>", { desc = "Quit all buffers" })
+map("n", "<C-q>", "<cmd>qa<CR>", { desc = "Quit all buffers" })
 map("v", "d", '"_x"<esc>', { desc = "Delete without yanking" })
+map("n", "dd", '"_dd', { desc = "Delete line without yanking" })
+map("n", "D", '"_d$', { desc = "Delete to end of line without yanking" })
+map("n", "Y", '"_y$', { desc = "Yank to end of line" })
+map("n", "xx", "ddp", { desc = "Yank whole line and delete it" })
+map("n", "Y", '"_y$"_d$', { desc = "Yank to end of line and delete to end of line" })
+
+-- stop p from yanking selected text
+vim.keymap.set("v", "p", '"_dP')
+
+-- stop c from yanking
+vim.keymap.set("v", "c", '"_c')
+vim.keymap.set("v", "C", '"_c$')
+vim.keymap.set("n", "c$", '"_c$')
+vim.keymap.set("n", "c%", '"_c%')
+vim.keymap.set("n", "c0", '"_c0')
+vim.keymap.set("n", "c^", '"_c^')
+vim.keymap.set("n", "c{", '"_c{')
+vim.keymap.set("n", "c}", '"_c}')
+vim.keymap.set("n", "cb", '"_cb')
+vim.keymap.set("n", "ce", '"_ce')
+vim.keymap.set("n", "cF", '"_cF')
+vim.keymap.set("n", "cf", '"_cf')
+vim.keymap.set("n", "cG", '"_cG')
+vim.keymap.set("n", "ch", '"_ch')
+vim.keymap.set("n", "cj", '"_cj')
+vim.keymap.set("n", "ck", '"_ck')
+vim.keymap.set("n", "cl", '"_cl')
+vim.keymap.set("n", "cT", '"_cT')
+vim.keymap.set("n", "ct", '"_ct')
+vim.keymap.set("n", "cw", '"_cw')
+vim.keymap.set("n", "c[", '"_c[')
+vim.keymap.set("n", "c]", '"_c]')
+vim.keymap.set("n", "ca", '"_ca')
+vim.keymap.set("n", "cg", '"_cg')
+vim.keymap.set("n", "ci", '"_ci')
 
 -- explorer
-map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-map("n", "<leader>o", ":NvimTreeFocus<CR>", { desc = "Focus file explorer" })
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+map("n", "<leader>o", "<cmd>NvimTreeFocus<CR>", { desc = "Focus file explorer" })
 
 -- git
-map("n", "<leader>gg", ":LazyGit<CR>", { desc = "LazyGit" })
-map("n", "<leader>gp", ":Git pull<CR>", { desc = "Git pull" })
-map("n", "<leader>gP", ":Git push<CR>", { desc = "Git push" })
-map("n", "<leader>gc", ":Git commit -v<CR>", { desc = "Git commit" })
-map("n", "<leader>gb", ":Git branch<CR>", { desc = "Git branch" })
-map("n", "<leader>gs", ":Git status<CR>", { desc = "Git status" })
-map("n", "<leader>gd", ":Git diff<CR>", { desc = "Git diff" })
-map("n", "<leader>gl", ":Git log<CR>", { desc = "Git log" })
-map("n", "<leader>gS", ":Git stash<CR>", { desc = "Git stash" })
-map("n", "<leader>gR", ":Git restore<CR>", { desc = "Git restore" })
+map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
+map("n", "<leader>gp", "<cmd>Git pull<CR>", { desc = "Git pull" })
+map("n", "<leader>gP", "<cmd>Git push<CR>", { desc = "Git push" })
+map("n", "<leader>gc", "<cmd>Git commit -v<CR>", { desc = "Git commit" })
+map("n", "<leader>gb", "<cmd>Git branch<CR>", { desc = "Git branch" })
+map("n", "<leader>gs", "<cmd>Git status<CR>", { desc = "Git status" })
+map("n", "<leader>gd", "<cmd>Git diff<CR>", { desc = "Git diff" })
+map("n", "<leader>gl", "<cmd>Git log<CR>", { desc = "Git log" })
+map("n", "<leader>gS", "<cmd>Git stash<CR>", { desc = "Git stash" })
+map("n", "<leader>gR", "<cmd>Git restore<CR>", { desc = "Git restore" })
 
 -- telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files" })
@@ -39,6 +74,7 @@ map("n", "<leader>fB", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy search buff
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Fuzzy search help tags" })
 map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", { desc = "Fuzzy search clipboard history" })
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Fuzzy search zoxide history" })
+map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover" })
 
 -- harpoon
 map("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Fuzzy search Harpoon marks" })
@@ -60,9 +96,10 @@ map("n", "<leader>h9", '<cmd>lua require("harpoon.ui").nav_file(9)<cr>', { desc 
 map("n", "<leader>+", "<C-a>", { desc = "Increment number" })
 map("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
 
--- split window
+-- window
 map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+map("n", "<leader>m", "<cmd>Glow<CR>", { desc = "Markdown preview" })
 
 -- Prime
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line down" })

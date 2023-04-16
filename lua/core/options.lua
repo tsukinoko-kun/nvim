@@ -21,6 +21,7 @@ opt.wrap = true
 -- search
 opt.ignorecase = true
 opt.smartcase = true
+vim.cmd("set rtp+=/opt/homebrew/opt/fzf")
 
 -- cursor line
 opt.cursorline = true
@@ -45,10 +46,3 @@ opt.splitbelow = true
 -- keywords
 opt.iskeyword:append("-")
 opt.iskeyword:append("_")
-
--- set language
-if not pcall(function()
-	vim.cmd("lang en_US")
-end) then
-	print("Failed to set language to en_US")
-end

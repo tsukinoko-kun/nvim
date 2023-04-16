@@ -8,10 +8,15 @@
 
 ## Required software
 
+-   [true color terminal emulator](https://alacritty.org)
 -   [ripgrep](https://github.com/BurntSushi/ripgrep)
 -   [lazygit](https://github.com/jesseduffield/lazygit)
 -   [zoxide](https://github.com/ajeetdsouza/zoxide)
--   [Node](https://nodejs.org)
+-   [npm](https://nodejs.org)
+-   [lldb](https://lldb.llvm.org)
+-   [rust-analyzer](https://rustup.rs)
+    - `rustup component add rust-analyzer`
+-   [pip3](https://www.python.org/downloads)
 -   [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
 
 ## Included language setups

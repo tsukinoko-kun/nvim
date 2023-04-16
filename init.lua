@@ -1,3 +1,10 @@
+-- set language
+if not pcall(function()
+	vim.cmd("lang en_US")
+end) then
+	print("Failed to set language to en_US")
+end
+
 require("plugins-setup")
 
 -- core
