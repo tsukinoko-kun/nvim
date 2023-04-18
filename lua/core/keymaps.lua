@@ -1,11 +1,11 @@
 vim.g.mapleader = " "
 
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.keymap.set(mode, lhs, rhs, options)
+    local options = { noremap = true, silent = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
 map("i", "<C-w>", "<cmd>noautocmd wa!<CR>", { desc = "Write all buffers" })
@@ -66,10 +66,15 @@ map("n", "<leader>gS", "<cmd>Git stash<CR>", { desc = "Git stash" })
 map("n", "<leader>gR", "<cmd>Git restore<CR>", { desc = "Git restore" })
 
 -- telescope
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files" })
+map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = "Fuzzy search files" })
 map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Fuzzy search in files" })
 map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "grep find in files" })
-map("n", "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Fuzzy search current buffer" })
+map(
+    "n",
+    "<leader>fb",
+    "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorting_strategy = 'ascending', prompt_position = 'top' })<cr>",
+    { desc = "Fuzzy search current buffer" }
+)
 map("n", "<leader>fB", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy search buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Fuzzy search help tags" })
 map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", { desc = "Fuzzy search clipboard history" })

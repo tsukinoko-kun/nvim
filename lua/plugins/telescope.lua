@@ -17,6 +17,14 @@ end
 telescope.setup({
 	-- configure custom mappings
 	defaults = {
+        pickers = {
+            find_files = {
+                hidden = true,
+            },
+            live_grep = {
+                hidden = true,
+            },
+        },
 		mappings = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -24,6 +32,11 @@ telescope.setup({
 				["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
 			},
 		},
+        file_ignore_patterns = {
+            "^.git/",
+            "^.cache/",
+            "node_modules/",
+        }
 	},
 	extensions = {
 		["ui-select"] = {
