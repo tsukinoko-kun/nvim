@@ -73,7 +73,7 @@ return packer.startup(function(use)
 
     -- fuzzy finding w/ telescope
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-    use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
+    use({ "nvim-telescope/telescope.nvim" }) -- fuzzy finder
     use({ "nvim-telescope/telescope-ui-select.nvim" }) -- for showing lsp code actions
     use({
         "AckslD/nvim-neoclip.lua",
@@ -86,20 +86,28 @@ return packer.startup(function(use)
         end,
     })
     use({
-        "JASONews/glow-hover",
-        requires = {
-            { "nvim-telescope/telescope.nvim" },
-        },
+        "lewis6991/hover.nvim",
         config = function()
-            require("glow-hover").setup({
-                max_width = 50,
-                padding = 10,
-                border = "shadow",
-                glow_path = "glow",
+            require("hover").setup({
+                init = function()
+                    -- Require providers
+                    require("hover.providers.lsp")
+                    -- require('hover.providers.gh')
+                    -- require('hover.providers.gh_user')
+                    -- require('hover.providers.jira')
+                    -- require('hover.providers.man')
+                    -- require('hover.providers.dictionary')
+                end,
+                preview_opts = {
+                    border = nil,
+                },
+                -- Whether the contents of a currently open hover window should be moved
+                -- to a :h preview-window when pressing the hover keymap.
+                preview_window = false,
+                title = true,
             })
         end,
     })
-
     use("ThePrimeagen/harpoon") -- for managing multiple buffers
 
     use({
@@ -117,11 +125,7 @@ return packer.startup(function(use)
     use({
         "folke/which-key.nvim",
         config = function()
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
+            require("which-key").setup()
         end,
     })
 
@@ -137,6 +141,7 @@ return packer.startup(function(use)
     -- configuring lsp servers
     use("neovim/nvim-lspconfig") -- easily configure language servers
     use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+    use("simrat39/inlay-hints.nvim") -- for showing type hints
     use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
     use("p00f/clangd_extensions.nvim") -- additional functionality for clangd server (e.g. rename file & update imports)
     use({
@@ -161,6 +166,14 @@ return packer.startup(function(use)
     -- formatting & linting
     use("jose-elias-alvarez/null-ls.nvim")
     use("jayp0521/mason-null-ls.nvim")
+
+    -- debugging
+    use("mfussenegger/nvim-dap") -- dap
+    use("rcarriga/nvim-dap-ui") -- dap ui
+    use("theHamsta/nvim-dap-virtual-text") -- dap virtual text
+    use("nvim-telescope/telescope-dap.nvim") -- telescope integration for dap
+    use("jay-babu/mason-nvim-dap.nvim") -- mason integration for dap
+    use("leoluz/nvim-dap-go") -- dap for go
 
     -- treesitter configuration
     use({

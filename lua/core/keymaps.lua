@@ -79,7 +79,8 @@ map("n", "<leader>fB", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy search buff
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Fuzzy search help tags" })
 map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", { desc = "Fuzzy search clipboard history" })
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Fuzzy search zoxide history" })
-map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover" })
+map("n", "K", require("hover").hover, { desc = "Hover" })
+-- map("n", "gK", require("hover").hover_select, { desc = "Hover select" })
 
 -- harpoon
 map("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", { desc = "Fuzzy search Harpoon marks" })
@@ -113,5 +114,9 @@ map("n", "J", "mzJ`z", { desc = "Move current line down" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 
---vim.o.copilot_no_tab = true
---vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
+-- dap
+map("n", "<f5>", "<cmd>lua require'dap'.continue()<CR>", { desc = "Continue" })
+map("n", "<f10>", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Step over" })
+map("n", "<f11>", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Step into" })
+map("n", "<f12>", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Step out" })
+map("n", "<f9>", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Toggle breakpoint" })
