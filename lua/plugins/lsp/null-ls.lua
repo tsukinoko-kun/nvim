@@ -18,7 +18,12 @@ null_ls.setup({
 			extra_args = { "--tab-width", "4", "--trailing-comma", "all" },
 		}),
 		formatting.stylua, -- lua formatter
-		formatting.clang_format, -- c/c++ formatter
+		formatting.clang_format.with({
+            -- c, c++, java
+            filetypes = { "c", "cpp", "java" },
+            -- indent size 4 spaces
+            extra_args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
+        }), -- c/c++ formatter
 		formatting.rustfmt, -- rust formatter
 		formatting.eslint_d.with({ -- js/ts linter
 			condition = function(utils)
