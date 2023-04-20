@@ -19,8 +19,6 @@ null_ls.setup({
 		}),
 		formatting.stylua, -- lua formatter
 		formatting.clang_format.with({
-            -- c, c++, java
-            filetypes = { "c", "cpp", "java" },
             -- indent size 4 spaces
             extra_args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
         }), -- c/c++ formatter

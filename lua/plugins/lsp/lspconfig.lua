@@ -138,9 +138,7 @@ if rusttools_setup then
     rusttools.setup({
         tools = {
             on_initialized = function()
-                if ih_status then
-                    ih.set_all()
-                end
+                ih.set_all()
             end,
             inlay_hints = {
                 auto = true,
@@ -165,14 +163,33 @@ lspconfig.jdtls.setup({
     settings = {
         java = {
             signatureHelp = { enabled = true },
+            eclipse = {
+                downloadSources = true,
+            },
             configuration = {
-                runtimes = {
-                    {
-                        name = "Amazon-Corretto",
-                        path = "/usr/bin/javac",
-                    },
+                updateBuildConfiguration = "interactive",
+            },
+            maven = {
+                downloadSources = true,
+            },
+            implementationsCodeLens = {
+                enabled = true,
+            },
+            referencesCodeLens = {
+                enabled = true,
+            },
+            references = {
+                includeDecompiledSources = true,
+            },
+            inlayHints = {
+                parameterNames = {
+                    enabled = "all", -- literals, all, none
                 },
             },
+            format = {
+                enabled = true,
+            },
+            contentProvider = { preferred = "fernflower" },
         },
     },
 })

@@ -48,7 +48,6 @@ mason_null_ls.setup({
         "markdownlint", -- markdown linter
         "lua_ls", -- lua linter
         "clang-format", -- c, c++, objc formatter
-        "jdtls", -- java
     },
     -- auto-install configured formatters & linters (with null-ls)
     automatic_installation = true,
