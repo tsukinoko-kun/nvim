@@ -141,7 +141,6 @@ return packer.startup(function(use)
     -- configuring lsp servers
     use("neovim/nvim-lspconfig") -- easily configure language servers
     use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-    use("simrat39/inlay-hints.nvim") -- for showing type hints
     use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
     use("p00f/clangd_extensions.nvim") -- additional functionality for clangd server (e.g. rename file & update imports)
     use({

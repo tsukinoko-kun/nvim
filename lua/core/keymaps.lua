@@ -23,6 +23,8 @@ map("n", "Y", '"_y$"_d$', { desc = "Yank to end of line and delete to end of lin
 vim.keymap.set("v", "p", '"_dP')
 
 -- stop c from yanking
+vim.keymap.set("n", "c", '"_c')
+vim.keymap.set("n", "C", '"_c$')
 vim.keymap.set("v", "c", '"_c')
 vim.keymap.set("v", "C", '"_c$')
 vim.keymap.set("n", "c$", '"_c$')

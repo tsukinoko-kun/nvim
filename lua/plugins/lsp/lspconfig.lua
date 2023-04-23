@@ -1,5 +1,3 @@
-local ih = require("inlay-hints")
-
 -- import lspconfig plugin safely
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
@@ -20,10 +18,8 @@ end
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-    ih.on_attach(client, bufnr)
-
     if client.name ~= "null-ls" then
-        print("LSP " .. client.name .. " attached")
+        print("LS " .. client.name .. " attached")
     end
 
     local function map(mode, lhs, rhs, opts)
@@ -118,15 +114,20 @@ lspconfig["rust_analyzer"].setup({
         ["rust-analyzer"] = {
             filetypes = { "rust" },
             -- root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-            assist = {
-                importGranularity = "module",
-                importPrefix = "by_self",
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
             },
             cargo = {
-                loadOutDirsFromCheck = true,
+                allFeatures = true,
+            },
+            checkOnSave = {
+                allFeatures = true,
             },
             procMacro = {
-                enable = true,
+                enable = true
             },
         },
     },
@@ -137,11 +138,10 @@ local rusttools_setup, rusttools = pcall(require, "rust-tools")
 if rusttools_setup then
     rusttools.setup({
         tools = {
-            on_initialized = function()
-                ih.set_all()
-            end,
             inlay_hints = {
                 auto = true,
+                only_current_line = false,
+                highlight = "Comment",
             },
         },
         server = {
