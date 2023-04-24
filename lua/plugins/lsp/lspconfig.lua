@@ -18,7 +18,7 @@ end
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-    if client.name ~= "null-ls" then
+    if client.name ~= "null-ls" and client.name ~= nil then
         print("LS " .. client.name .. " attached")
     end
 
