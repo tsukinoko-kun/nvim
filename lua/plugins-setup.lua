@@ -119,7 +119,7 @@ return packer.startup(function(use)
 
     -- autocomplete
     use("hrsh7th/nvim-cmp")
-    use("hrsh7th/cmp-buffer")
+    -- use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-nvim-lua")
     use({
@@ -145,7 +145,7 @@ return packer.startup(function(use)
     use("p00f/clangd_extensions.nvim") -- additional functionality for clangd server (e.g. rename file & update imports)
     use({
         "simrat39/rust-tools.nvim",
-        ft = "rust",
+        requires = { "neovim/nvim-lspconfig" },
     }) -- additional functionality for rust server (e.g. rename file & update imports)
     use({
         "saecki/crates.nvim",

@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+vim.o.completeopt = "menuone,noinsert,noselect"
+vim.wo.signcolumn = "yes"
+
 -- timeout
 opt.timeoutlen = 500
 opt.timeout = true

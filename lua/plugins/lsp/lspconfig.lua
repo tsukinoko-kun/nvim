@@ -56,6 +56,17 @@ local on_attach = function(client, bufnr)
     if client.name == "clangd" then
         map("n", "gh", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle header/source" })
     end
+
+    if client.name == "rust_analyzer" then
+        local rt = require("rust-tools")
+        rt.inlay_hints.set()
+        map("n", "K", rt.rt.hover_actions.hover_actions, { desc = "Show hover actions" })
+        map("n", "<leader>fr", rt.runnables.runnables, { desc = "Show runnables" })
+        map("n", "<leader>fd", rt.debuggables.debuggables, { desc = "Show debuggables" })
+        map("n", "<leader>lR", ":RustRenameFile<CR>", { desc = "Rename file and update imports" })
+        map("n", "<leader>loi", ":RustOrganizeImports<CR>", { desc = "Organize imports" })
+        map("n", "<leader>lru", ":RustRemoveUnused<CR>", { desc = "Remove unused imports" })
+    end
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
@@ -105,51 +116,34 @@ lspconfig["lua_ls"].setup({
     },
 })
 
--- configure rust server
-lspconfig["rust_analyzer"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    cmd = { "rustup", "run", "stable", "rust-analyzer" },
-    settings = {
-        ["rust-analyzer"] = {
-            filetypes = { "rust" },
-            -- root_dir = lspconfig.util.root_pattern("Cargo.toml"),
-            imports = {
-                granularity = {
-                    group = "module",
+local rt = require("rust-tools")
+
+rt.setup({
+    tools = {
+        runnables = {
+            use_telescope = true,
+        },
+        inlay_hints = {
+            auto = true,
+            show_parameter_hints = true,
+            current_line_only = false,
+        },
+        cargo = {
+            all_features = true,
+        },
+    },
+    server = {
+        on_attach = on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
                 },
-                prefix = "self",
-            },
-            cargo = {
-                allFeatures = true,
-            },
-            checkOnSave = {
-                allFeatures = true,
-            },
-            procMacro = {
-                enable = true
             },
         },
     },
 })
-
-local rusttools_setup, rusttools = pcall(require, "rust-tools")
-
-if rusttools_setup then
-    rusttools.setup({
-        tools = {
-            inlay_hints = {
-                auto = true,
-                only_current_line = false,
-                highlight = "Comment",
-            },
-        },
-        server = {
-            on_attach = on_attach,
-            capabilities = capabilities,
-        },
-    })
-end
+rt.inlay_hints.enable()
 
 lspconfig.jdtls.setup({
     capabilities = capabilities,
