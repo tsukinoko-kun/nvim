@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
     if client.name == "rust_analyzer" then
         local rt = require("rust-tools")
         rt.inlay_hints.set()
-        map("n", "K", rt.rt.hover_actions.hover_actions, { desc = "Show hover actions" })
+        map("n", "K", rt.rt.hover_actions.hover_actions, { desc = "Show hover actions (rust-tools)" })
         map("n", "<leader>fr", rt.runnables.runnables, { desc = "Show runnables" })
         map("n", "<leader>fd", rt.debuggables.debuggables, { desc = "Show debuggables" })
         map("n", "<leader>lR", ":RustRenameFile<CR>", { desc = "Rename file and update imports" })
@@ -117,7 +117,6 @@ lspconfig["lua_ls"].setup({
 })
 
 local rt = require("rust-tools")
-
 rt.setup({
     tools = {
         runnables = {
@@ -125,8 +124,11 @@ rt.setup({
         },
         inlay_hints = {
             auto = true,
+            only_current_line = false,
             show_parameter_hints = true,
-            current_line_only = false,
+            max_len_align = false,
+            max_len_align_padding = 1,
+            highlight = "Comment",
         },
         cargo = {
             all_features = true,
@@ -134,12 +136,38 @@ rt.setup({
     },
     server = {
         on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = { "rustup", "run", "stable", "rust-analyzer" },
+        standalone = false,
         settings = {
             ["rust-analyzer"] = {
+                assist = {
+                    importEnforceGranularity = true,
+                    importPrefix = "crate",
+                },
                 checkOnSave = {
                     command = "clippy",
                 },
+                cargo = {
+                    allFeatures = true,
+                },
+                procMacro = {
+                    enable = true,
+                },
+                diagnostics = {
+                    enable = true,
+                    experimental = {
+                        enable = true,
+                    },
+                },
             },
+        },
+    },
+    dap = {
+        adapter = {
+            type = "executable",
+            command = "lldb-vscode",
+            name = "rt_lldb",
         },
     },
 })

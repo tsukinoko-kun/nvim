@@ -27,8 +27,7 @@ require("plugins.nvim-colorizer")
 require("plugins.gitsigns")
 
 -- dap
--- require("plugins.dap.dap")
--- require("plugins.dap.mason")
--- require("plugins.dap.nvim-dap-virtual-text")
--- require("plugins.dap.dapui")
--- require("plugins.dap.dap-go")
+require("plugins.dap.dap")
+require("plugins.dap.mason")
+require("plugins.dap.nvim-dap-virtual-text")
+require("plugins.dap.dapui")

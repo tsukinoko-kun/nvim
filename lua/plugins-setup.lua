@@ -149,9 +149,15 @@ return packer.startup(function(use)
     }) -- additional functionality for rust server (e.g. rename file & update imports)
     use({
         "saecki/crates.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        event = { "BufRead Cargo.toml" },
+        requires = { "nvim-lua/plenary.nvim", "jose-elias-alvarez/null-ls.nvim" },
         config = function()
-            require("crates").setup()
+            require("crates").setup({
+                null_ls = {
+                    enabled = true,
+                    name = "crates.nvim",
+                },
+            })
         end,
     })
     use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
@@ -172,7 +178,6 @@ return packer.startup(function(use)
     use("theHamsta/nvim-dap-virtual-text") -- dap virtual text
     use("nvim-telescope/telescope-dap.nvim") -- telescope integration for dap
     use("jay-babu/mason-nvim-dap.nvim") -- mason integration for dap
-    use("leoluz/nvim-dap-go") -- dap for go
 
     -- treesitter configuration
     use({
