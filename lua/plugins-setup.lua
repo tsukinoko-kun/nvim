@@ -203,6 +203,7 @@ return packer.startup(function(use)
     use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
     use("tpope/vim-fugitive") -- git commands in vim
     use("kdheepak/lazygit.nvim") -- lazygit in vim
+    use("ThePrimeagen/git-worktree.nvim") -- git worktree integration
 
     use({
         "github/copilot.vim",
