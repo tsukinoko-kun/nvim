@@ -5,7 +5,6 @@ vim.wo.signcolumn = "yes"
 
 -- disable mouse
 opt.mouse = ""
-opt.ttymouse = ""
 
 -- timeout
 opt.timeoutlen = 500
