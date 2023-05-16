@@ -3,6 +3,10 @@ local opt = vim.opt
 vim.o.completeopt = "menuone,noinsert,noselect"
 vim.wo.signcolumn = "yes"
 
+-- disable mouse
+opt.mouse = ""
+opt.ttymouse = ""
+
 -- timeout
 opt.timeoutlen = 500
 opt.timeout = true

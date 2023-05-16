@@ -2,7 +2,7 @@
 if not pcall(function()
 	vim.cmd("lang en_US")
 end) then
-	print("Failed to set language to en_US")
+	print("Failed to set locale")
 end
 
 require("plugins-setup")
