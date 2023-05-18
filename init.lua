@@ -1,6 +1,6 @@
 -- set language
 if not pcall(function()
-	vim.cmd("lang en_US")
+	vim.cmd("lang en_US.UTF-8")
 end) then
 	print("Failed to set locale")
 end
