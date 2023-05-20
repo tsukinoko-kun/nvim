@@ -11,6 +11,7 @@
 -   [lldb](https://lldb.llvm.org)
 -   [rust-analyzer](https://rustup.rs)
     - `rustup component add rust-analyzer`
+-   [go](https://go.dev/)
 -   [pip3](https://www.python.org/downloads)
 -   [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
 
@@ -27,6 +28,7 @@
 -   [Astro](https://astro.build/)
 -   [Lua](https://www.lua.org/)
 -   [Python](https://www.python.org/)
+-   [Go](https://go.dev/)
 -   Java
 -   C
 -   C++
