@@ -3,7 +3,7 @@
 ## Required software
 
 -   [make](https://www.gnu.org/software/make/)
--   [true color terminal emulator](https://alacritty.org)
+-   true color terminal emulator [Alacritty](https://alacritty.org) or [Kitty](https://sw.kovidgoyal.net/kitty/)
 -   [ripgrep](https://github.com/BurntSushi/ripgrep)
 -   [lazygit](https://github.com/jesseduffield/lazygit)
 -   [zoxide](https://github.com/ajeetdsouza/zoxide)
