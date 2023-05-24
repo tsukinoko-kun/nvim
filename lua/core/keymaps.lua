@@ -14,6 +14,9 @@ map("n", "k", "kzz")
 map("n", "gg", "ggzz")
 map("n", "G", "Gzz")
 
+-- remove highlight on escape (additionally to default <esc> behaviour)
+map("n", "<esc>", "<cmd>noh<cr><esc>")
+
 map("i", "<C-s>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
 map("n", "<C-s>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
 map("i", "<C-q>", "<cmd>qa<CR>", { desc = "Quit all buffers" })
