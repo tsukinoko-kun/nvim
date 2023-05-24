@@ -31,6 +31,8 @@ vim.cmd("set rtp+=/opt/homebrew/opt/fzf")
 
 -- cursor line
 opt.cursorline = true
+
+-- scrolloff
 opt.scrolloff = 8
 
 -- appearance
@@ -50,5 +52,4 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- keywords
-opt.iskeyword:append("-")
 opt.iskeyword:append("_")

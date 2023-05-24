@@ -8,8 +8,14 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
-map("i", "<C-w>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
-map("n", "<C-w>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
+-- awlays center line by calling zz after jumping
+map("n", "j", "jzz")
+map("n", "k", "kzz")
+map("n", "gg", "ggzz")
+map("n", "G", "Gzz")
+
+map("i", "<C-s>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
+map("n", "<C-s>", "<cmd>wa!<CR>", { desc = "Write all buffers" })
 map("i", "<C-q>", "<cmd>qa<CR>", { desc = "Quit all buffers" })
 map("n", "<C-q>", "<cmd>qa<CR>", { desc = "Quit all buffers" })
 map("v", "d", '"_x"<esc>', { desc = "Delete without yanking" })
