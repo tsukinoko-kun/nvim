@@ -8,12 +8,6 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- awlays center line by calling zz after jumping
-map("n", "j", "jzz")
-map("n", "k", "kzz")
-map("n", "gg", "ggzz")
-map("n", "G", "Gzz")
-
 -- remove highlight on escape (additionally to default <esc> behaviour)
 map("n", "<esc>", "<cmd>noh<cr><esc>")
 
