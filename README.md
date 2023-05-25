@@ -3,13 +3,13 @@
 ## Required software
 
 -   [make](https://www.gnu.org/software/make/)
--   true color terminal emulator [Alacritty](https://alacritty.org) or [Kitty](https://sw.kovidgoyal.net/kitty/)
+-   true color terminal emulator like [Alacritty](https://alacritty.org) or [Kitty](https://sw.kovidgoyal.net/kitty/)
 -   [ripgrep](https://github.com/BurntSushi/ripgrep)
 -   [lazygit](https://github.com/jesseduffield/lazygit)
 -   [zoxide](https://github.com/ajeetdsouza/zoxide)
 -   [npm](https://nodejs.org)
 -   [lldb](https://lldb.llvm.org)
--   [rust-analyzer](https://rustup.rs)
+-   [rustup](https://rustup.rs)
     - `rustup component add rust-analyzer`
 -   [go](https://go.dev/)
 -   [pip3](https://www.python.org/downloads)
