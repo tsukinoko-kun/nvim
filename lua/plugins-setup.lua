@@ -25,7 +25,7 @@ return packer.startup(function(use)
     -- My plugins here
 
     use({ "kkharji/sqlite.lua" }) -- sqlite3 for lua
-    use("EdenEast/nightfox.nvim") -- preferred colorscheme
+    use({ "catppuccin/nvim", as = "catppuccin" }) -- preferred colorscheme
     use("ericbn/vim-relativize") -- relative line numbers
     use("numToStr/Comment.nvim") -- commenting with gc
     use("gpanders/editorconfig.nvim") -- editorconfig support
