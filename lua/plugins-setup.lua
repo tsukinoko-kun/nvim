@@ -25,13 +25,23 @@ return packer.startup(function(use)
     -- My plugins here
 
     use({ "kkharji/sqlite.lua" }) -- sqlite3 for lua
-    use({ "catppuccin/nvim", as = "catppuccin" }) -- preferred colorscheme
+    use({
+        "catppuccin/nvim",
+        as = "catppuccin",
+    }) -- preferred colorscheme
     use("ericbn/vim-relativize") -- relative line numbers
     use("numToStr/Comment.nvim") -- commenting with gc
     use("gpanders/editorconfig.nvim") -- editorconfig support
 
     use("nvim-tree/nvim-tree.lua") -- file explorer
     use("nvim-tree/nvim-web-devicons") -- vs-code like icons
+    use({
+        "glepnir/nerdicons.nvim",
+        cmd = "NerdIcons",
+        config = function()
+            require("nerdicons").setup({})
+        end,
+    })
 
     use({
         "glepnir/dashboard-nvim",
@@ -45,19 +55,23 @@ return packer.startup(function(use)
                         enable = true,
                     },
                     shortcut = {
-                        { desc = " Update", group = "@property", action = "PackerSync", key = "u" },
                         {
-                            icon = " ",
-                            icon_hl = "@variable",
-                            desc = "Files",
+                            icon = "󰚰",
+                            desc = " Update",
+                            group = "@property",
+                            action = "PackerSync",
+                            key = "u",
+                        },
+                        {
+                            icon = "󰥨",
+                            desc = " Files",
                             group = "Label",
                             action = "Telescope find_files",
                             key = "f",
                         },
                         {
-                            icon = " ",
-                            icon_hl = "@error",
-                            desc = "Quit",
+                            icon = "󰿅",
+                            desc = " Quit",
                             group = "Label",
                             action = "quit",
                             key = "q",
@@ -66,7 +80,7 @@ return packer.startup(function(use)
                 },
             })
         end,
-        requires = { "nvim-tree/nvim-web-devicons" },
+        requires = { "nvim-tree/nvim-web-devicons", "glepnir/nerdicons.nvim" },
     })
 
     use("nvim-lualine/lualine.nvim") -- statusline

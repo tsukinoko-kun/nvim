@@ -25,6 +25,7 @@ require("plugins.autopairs")
 require("plugins.treesitter")
 require("plugins.nvim-colorizer")
 require("plugins.gitsigns")
+require("plugins.catppuccin")
 
 -- dap
 require("plugins.dap.dap")
