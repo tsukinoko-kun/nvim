@@ -20,7 +20,7 @@ mason_lspconfig.setup({
     -- list of servers for mason to install
     ensure_installed = {
         "rust_analyzer", -- rust
-        "astro", -- astro
+        "astro@v1.0.8", -- astro
         "clangd", -- c, c++, objc
         "tsserver", -- ts/js
         "gopls", -- go
