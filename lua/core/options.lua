@@ -23,6 +23,7 @@ opt.smartindent = true
 
 -- line wrapping
 opt.wrap = true
+opt.colorcolumn = "80"
 
 -- search
 opt.ignorecase = true
