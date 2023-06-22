@@ -18,8 +18,6 @@
 ## Activation
 
 -   `:PackerSync`
--   restart nvim
--   `:Copilot setup`
 
 ## Included language setups
 

@@ -219,13 +219,6 @@ return packer.startup(function(use)
     use("kdheepak/lazygit.nvim") -- lazygit in vim
     use("ThePrimeagen/git-worktree.nvim") -- git worktree integration
 
-    use({
-        "github/copilot.vim",
-        config = function()
-            vim.g.copilot_enabled = 1
-        end,
-    })
-
     if packer_bootstrap then
         require("packer").sync()
     end
