@@ -114,6 +114,24 @@ map("n", "xaw", "daw", {
 map("n", "xap", "dap", {
     desc = "Cut out around paragraph"
 })
+map("n", "xa{", "da{", {
+    desc = "Cut out around curly braces"
+})
+map("n", "xa[", "da[", {
+    desc = "Cut out around square brackets"
+})
+map("n", "xa(", "da(", {
+    desc = "Cut out around parentheses"
+})
+map("n", 'xa"', 'da"', {
+    desc = 'Cut out around double quotes'
+})
+map("n", "xa'", "da'", {
+    desc = "Cut out around single quotes"
+})
+map("n", "xa<", "da<", {
+    desc = "Cut out around angle brackets"
+})
 map("n", "xg", "dg", {
     desc = "Cut out to last change"
 })
@@ -122,6 +140,24 @@ map("n", "xiw", "diw", {
 })
 map("n", "xip", "dip", {
     desc = "Cut out to inside paragraph"
+})
+map("n", "xi{", "di{", {
+    desc = "Cut out to inside curly braces"
+})
+map("n", "xi[", "di[", {
+    desc = "Cut out to inside square brackets"
+})
+map("n", "xi(", "di(", {
+    desc = "Cut out to inside parentheses"
+})
+map("n", 'xi"', 'di"', {
+    desc = 'Cut out to inside double quotes'
+})
+map("n", "xi'", "di'", {
+    desc = "Cut out to inside single quotes"
+})
+map("n", "xi<", "di<", {
+    desc = "Cut out to inside angle brackets"
 })
 
 -- stop p from yanking selected text
