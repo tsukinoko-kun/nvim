@@ -156,6 +156,7 @@ return packer.startup(function(use)
     use("jay-babu/mason-nvim-dap.nvim") -- mason integration for dap
 
     -- treesitter configuration
+    use("nvim-treesitter/nvim-treesitter-context")
     use({
         "nvim-treesitter/nvim-treesitter",
         run = function()
