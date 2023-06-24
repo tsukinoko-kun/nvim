@@ -114,6 +114,7 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Fuzzy search he
 map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", { desc = "Fuzzy search clipboard history" })
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", { desc = "Fuzzy search zoxide history" })
 map("n", "K", require("hover").hover, { desc = "Hover" })
+map("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Toggle undo tree" })
 -- map("n", "gK", require("hover").hover_select, { desc = "Hover select" })
 
 -- harpoon

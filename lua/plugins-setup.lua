@@ -85,6 +85,8 @@ return packer.startup(function(use)
 
     use("nvim-lualine/lualine.nvim") -- statusline
 
+    use("mbbill/undotree") -- undo tree
+
     -- fuzzy finding w/ telescope
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
     use({ "nvim-telescope/telescope.nvim" }) -- fuzzy finder
