@@ -33,7 +33,7 @@ return packer.startup(function(use)
     use("numToStr/Comment.nvim") -- commenting with gc
     use("gpanders/editorconfig.nvim") -- editorconfig support
 
-    use("nvim-tree/nvim-tree.lua") -- file explorer
+    use("prichrd/netrw.nvim") -- file explorer
     use("nvim-tree/nvim-web-devicons") -- vs-code like icons
     use({
         "glepnir/nerdicons.nvim",
@@ -41,46 +41,6 @@ return packer.startup(function(use)
         config = function()
             require("nerdicons").setup({})
         end,
-    })
-
-    use({
-        "glepnir/dashboard-nvim",
-        event = "VimEnter",
-        config = function()
-            require("dashboard").setup({
-                theme = "hyper",
-                shortcut_type = "number",
-                config = {
-                    week_header = {
-                        enable = true,
-                    },
-                    shortcut = {
-                        {
-                            icon = "󰚰",
-                            desc = " Update",
-                            group = "@property",
-                            action = "PackerSync",
-                            key = "u",
-                        },
-                        {
-                            icon = "󰥨",
-                            desc = " Files",
-                            group = "Label",
-                            action = "Telescope find_files",
-                            key = "f",
-                        },
-                        {
-                            icon = "󰿅",
-                            desc = " Quit",
-                            group = "Label",
-                            action = "quit",
-                            key = "q",
-                        },
-                    },
-                },
-            })
-        end,
-        requires = { "nvim-tree/nvim-web-devicons", "glepnir/nerdicons.nvim" },
     })
 
     use("nvim-lualine/lualine.nvim") -- statusline

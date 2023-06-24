@@ -1,8 +1,8 @@
 -- set language
 if not pcall(function()
-	vim.cmd("lang en_US.UTF-8")
+    vim.cmd("lang en_US.UTF-8")
 end) then
-	print("Failed to set locale")
+    print("Failed to set locale")
 end
 
 require("plugins-setup")
@@ -13,6 +13,7 @@ require("core.keymaps")
 require("core.colorscheme")
 
 -- plugins
+require("plugins.netrw")
 require("plugins.comment")
 require("plugins.nvim-tree")
 require("plugins.lualine")

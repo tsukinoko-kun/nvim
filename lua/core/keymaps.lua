@@ -84,8 +84,7 @@ vim.keymap.set("n", "dg", '"_dg')
 vim.keymap.set("n", "di", '"_di')
 
 -- explorer
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-map("n", "<leader>o", "<cmd>NvimTreeFocus<CR>", { desc = "Focus file explorer" })
+map("n", "<leader>e", "<cmd>Explore<CR>", { desc = "Open explorer" })
 
 -- git
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
