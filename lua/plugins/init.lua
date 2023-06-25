@@ -4,20 +4,21 @@ return {
 
     -- My plugins here
 
-    { "kkharji/sqlite.lua" }, -- sqlite3 for lua
-    "ericbn/vim-relativize", -- relative line numbers
-    "numToStr/Comment.nvim", -- commenting with gc
-    "gpanders/editorconfig.nvim", -- editorconfig support
+    { "kkharji/sqlite.lua" },      -- sqlite3 for lua
+    "ericbn/vim-relativize",       -- relative line numbers
+    "numToStr/Comment.nvim",       -- commenting with gc
+    "gpanders/editorconfig.nvim",  -- editorconfig support
     "nvim-tree/nvim-web-devicons", -- vs-code like icons
     {
         "glepnir/nerdicons.nvim",
         config = true,
-        opts = {}
-    },    "mbbill/undotree", -- undo tree
+        opts = {},
+    },
+    "mbbill/undotree", -- undo tree
     {
         "AckslD/nvim-neoclip.lua",
         dependencies = {
-            { "kkharji/sqlite.lua", module = "sqlite" },
+            { "kkharji/sqlite.lua",           module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
         },
         config = true,
@@ -32,7 +33,7 @@ return {
                 -- require('hover.providers.gh_user')
                 -- require('hover.providers.jira')
                 -- require('hover.providers.man')
-                require('hover.providers.dictionary')
+                require("hover.providers.dictionary")
             end,
             preview_opts = {
                 border = nil,
@@ -41,7 +42,7 @@ return {
             -- to a :h preview-window when pressing the hover keymap.
             preview_window = false,
             title = true,
-        }
+        },
     },
     "ThePrimeagen/harpoon", -- for managing multiple buffers
     {
@@ -59,17 +60,17 @@ return {
     },
     -- snippets
     "rafamadriz/friendly-snippets", -- useful snippets
-    "onsails/lspkind.nvim", -- vs-code like icons for autocompletion
+    "onsails/lspkind.nvim",         -- vs-code like icons for autocompletion
     {
         "ellisonleao/glow.nvim",
         config = function()
             require("glow").setup()
         end,
-    }, -- markdown preview
+    },                                                              -- markdown preview
     { "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter" }, -- autoclose tags
     -- git integration
-    "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
-    "tpope/vim-fugitive", -- git commands in vim
-    "kdheepak/lazygit.nvim", -- lazygit in vim
-    "ThePrimeagen/git-worktree.nvim", -- git worktree integration
+    "lewis6991/gitsigns.nvim",                                      -- show line modifications on left hand side
+    "tpope/vim-fugitive",                                           -- git commands in vim
+    "kdheepak/lazygit.nvim",                                        -- lazygit in vim
+    "ThePrimeagen/git-worktree.nvim",                               -- git worktree integration
 }

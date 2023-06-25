@@ -2,7 +2,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- dependency for better sorting performance
-        { "nvim-telescope/telescope-ui-select.nvim" }, -- for showing lsp code actions
+        { "nvim-telescope/telescope-ui-select.nvim" },                  -- for showing lsp code actions
     },
     init = function()
         local telescope = require("telescope")
@@ -20,8 +20,8 @@ return {
                 },
                 mappings = {
                     i = {
-                        ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-                        ["<C-j>"] = actions.move_selection_next, -- move to next result
+                        ["<C-k>"] = actions.move_selection_previous,                       -- move to prev result
+                        ["<C-j>"] = actions.move_selection_next,                           -- move to next result
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                     },
                 },

@@ -2,7 +2,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
         local null_ls = require("null-ls")
-        local formatting = null_ls.builtins.formatting -- to setup formatters
+        local formatting = null_ls.builtins.formatting   -- to setup formatters
         local diagnostics = null_ls.builtins.diagnostics -- to setup linters
         null_ls.setup({
             -- setup formatters & linters
@@ -15,9 +15,9 @@ return {
                 formatting.clang_format.with({
                     -- indent size 4 spaces
                     extra_args = { "--style", "{BasedOnStyle: LLVM, IndentWidth: 4}" },
-                }), -- c/c++ formatter
+                }),                            -- c/c++ formatter
                 formatting.google_java_format, -- java formatter
-                formatting.rustfmt, -- rust formatter
+                formatting.rustfmt,            -- rust formatter
                 formatting.eslint_d.with({
                     -- js/ts linter
                     condition = function(utils)
@@ -43,5 +43,5 @@ return {
                 diagnostics.jsonlint, -- json
             },
         })
-    end
+    end,
 }

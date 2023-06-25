@@ -1,9 +1,9 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp", -- for autocompletion
+        "hrsh7th/cmp-nvim-lsp",               -- for autocompletion
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
-        "p00f/clangd_extensions.nvim", -- additional functionality for clangd server (e.g. rename file & update imports)
+        "p00f/clangd_extensions.nvim",        -- additional functionality for clangd server (e.g. rename file & update imports)
         {
             "simrat39/rust-tools.nvim",
             dependencies = { "neovim/nvim-lspconfig" },
@@ -24,12 +24,12 @@ return {
         {
             "smjonas/inc-rename.nvim",
             config = true,
-        }
+        },
     },
     config = function()
-        local lspconfig = require "lspconfig"
-        local cmp_nvim_lsp = require "cmp_nvim_lsp"
-        local typescript = require "typescript"
+        local lspconfig = require("lspconfig")
+        local cmp_nvim_lsp = require("cmp_nvim_lsp")
+        local typescript = require("typescript")
 
         -- enable keybinds only for when lsp server available
         local on_attach = function(client, bufnr)
@@ -37,9 +37,9 @@ return {
                 print("LS " .. client.name .. " attached")
             end
 
-            if client.server_capabilities.inlayHintProvider then
-                vim.lsp.buf.inlay_hint(bufnr, true)
-            end
+            -- if client.server_capabilities.inlayHintProvider then
+            --     vim.lsp.buf.inlay_hint(bufnr, true)
+            -- end
 
             local function map(mode, lhs, rhs, opts)
                 local options = { noremap = true, silent = true, buffer = bufnr }
@@ -58,7 +58,12 @@ return {
             map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Show code actions" })
             map("n", "<leader>lr", ":IncRename ", { desc = "Rename symbol" })
             map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
-            map("n", "<leader>lD", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Show diagnostics for current buffer" })
+            map(
+                "n",
+                "<leader>lD",
+                "<cmd>Telescope diagnostics bufnr=0<CR>",
+                { desc = "Show diagnostics for current buffer" }
+            )
             map("n", "<leader>lgD", vim.diagnostic.goto_prev, { desc = "Jump to previous diagnostic" })
             map("n", "<leader>lgd", vim.diagnostic.goto_next, { desc = "Jump to next diagnostic" })
             map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
@@ -273,7 +278,7 @@ return {
                     includeInlayPropertyDeclarationTypeHints = true,
                     includeInlayFunctionLikeReturnTypeHints = true,
                     includeInlayEnumMemberValueHints = true,
-                    importModuleSpecifierPreference = 'non-relative'
+                    importModuleSpecifierPreference = "non-relative",
                 },
             },
             settings = {
@@ -406,5 +411,5 @@ return {
                 },
             },
         })
-    end
+    end,
 }
