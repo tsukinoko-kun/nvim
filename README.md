@@ -15,10 +15,6 @@
 -   [pip3](https://www.python.org/downloads)
 -   [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
 
-## Activation
-
--   `:PackerSync`
-
 ## Included language setups
 
 -   [Rust](https://www.rust-lang.org/)
