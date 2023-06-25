@@ -37,10 +37,10 @@ opt.cursorline = true
 opt.scrolloff = 8
 
 -- appearance
-opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
 opt.showmode = false
+opt.termguicolors = true
 
 -- backspace
 opt.backspace = "indent,eol,start"
