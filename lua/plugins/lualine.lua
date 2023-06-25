@@ -1,10 +1,8 @@
-local status, lualine = pcall(require, "lualine")
-if not status then
-	return
-end
-
-lualine.setup({
-	options = {
-		theme = "catppuccin"
-	},
-})
+return {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+        options = {
+            theme = "catppuccin",
+        },
+    },
+}

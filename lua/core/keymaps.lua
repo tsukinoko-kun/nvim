@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 local function map(mode, lhs, rhs, opts)
     local options = {
         noremap = true,
@@ -288,7 +286,7 @@ map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", {
 map("n", "K", require("hover").hover, {
     desc = "Hover"
 })
-map("n", "<leader>u", "<cmd>UndotreeToggle<cr>", {
+map("n", "<leader>u", "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", {
     desc = "Toggle undo tree"
 })
 -- map("n", "gK", require("hover").hover_select, { desc = "Hover select" })
@@ -371,22 +369,4 @@ map("n", "<C-d>", "<C-d>zz", {
 })
 map("n", "<C-u>", "<C-u>zz", {
     desc = "Scroll up"
-})
-
--- dap
-local dap = require("dap")
-map("n", "<f5>", dap.continue, {
-    desc = "Continue"
-})
-map("n", "<f10>", dap.step_over, {
-    desc = "Step over"
-})
-map("n", "<f11>", dap.step_into, {
-    desc = "Step into"
-})
-map("n", "<f12>", dap.step_out, {
-    desc = "Step out"
-})
-map("n", "<f9>", dap.toggle_breakpoint, {
-    desc = "Toggle breakpoint"
 })
