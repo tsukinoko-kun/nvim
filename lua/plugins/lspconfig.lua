@@ -50,7 +50,7 @@ return {
             end
 
             -- set keybinds
-            map("n", "gR", "<cmd>Telescope lsp_references<CR>", { desc = "Show references" })
+            map("n", "gr", "<cmd>Telescope lsp_references<CR>", { desc = "Show references" })
             map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
             map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Go to definition" })
             map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementation" })
