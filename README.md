@@ -1,4 +1,4 @@
-# Neovim config
+# <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Neovim-mark.svg" alt="N" style="height:1.2em;transform:translateY(4px)" />eovim config
 
 ## Required software
 
