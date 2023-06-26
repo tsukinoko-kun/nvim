@@ -220,9 +220,7 @@ vim.keymap.set("n", "dg", '"_dg')
 vim.keymap.set("n", "di", '"_di')
 
 -- explorer
-map("n", "<leader>e", "<cmd>Explore<CR>", {
-    desc = "Open explorer",
-})
+map("n", "-", require("oil").open, { desc = "Open parent directory" })
 
 -- git
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
