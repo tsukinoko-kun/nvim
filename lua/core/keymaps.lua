@@ -221,6 +221,7 @@ vim.keymap.set("n", "di", '"_di')
 
 -- explorer
 map("n", "-", require("oil").open, { desc = "Open parent directory" })
+map("n", "<leader>t", require("trouble").toggle, { desc = "Toggle trouble list" })
 
 -- git
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
