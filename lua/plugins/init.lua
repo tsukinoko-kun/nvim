@@ -33,7 +33,7 @@ return {
                 -- require('hover.providers.gh_user')
                 -- require('hover.providers.jira')
                 -- require('hover.providers.man')
-                require("hover.providers.dictionary")
+                -- require("hover.providers.dictionary")
             end,
             preview_opts = {
                 border = nil,
@@ -54,18 +54,14 @@ return {
     -- "hrsh7th/cmp-buffer",
     {
         "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup()
-        end,
+        config = true,
     },
     -- snippets
     "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim",         -- vs-code like icons for autocompletion
     {
         "ellisonleao/glow.nvim",
-        config = function()
-            require("glow").setup()
-        end,
+        config = true,
     },                                                              -- markdown preview
     { "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter" }, -- autoclose tags
     -- git integration
