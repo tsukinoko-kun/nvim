@@ -331,6 +331,13 @@ return {
             },
         })
 
+        -- configure python server
+        lspconfig["pyright"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "python" },
+        })
+
         -- configure c/c++ server
         lspconfig["clangd"].setup({
             capabilities = capabilities,

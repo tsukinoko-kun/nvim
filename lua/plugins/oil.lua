@@ -5,7 +5,7 @@ return {
         -- See :help oil-columns
         columns = {
             "icon",
-            -- "permissions",
+            "permissions",
             -- "size",
             -- "mtime",
         },
@@ -15,17 +15,17 @@ return {
             bufhidden = "hide",
         },
         -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
-  default_file_explorer = true,
-  -- Restore window options to previous values when leaving an oil buffer
-  restore_win_options = true,
-  -- Skip the confirmation popup for simple operations
-  skip_confirm_for_simple_edits = false,
-  -- Deleted files will be removed with the trash_command (below).
-  delete_to_trash = false,
-keymaps = {
-    ["<leader>?"] = "actions.show_help",
-    ["<leader>."] = "actions.toggle_hidden",
-  },
+        default_file_explorer = true,
+        -- Restore window options to previous values when leaving an oil buffer
+        restore_win_options = true,
+        -- Skip the confirmation popup for simple operations
+        skip_confirm_for_simple_edits = true,
+        -- Deleted files will be removed with the trash_command (below).
+        delete_to_trash = false,
+        keymaps = {
+            ["<leader>?"] = "actions.show_help",
+            ["<leader>."] = "actions.toggle_hidden",
+        },
     },
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },

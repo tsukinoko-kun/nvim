@@ -25,6 +25,7 @@ return {
                 "yamlls",        -- yaml
                 "lemminx",       -- xml
                 "jdtls",         -- java
+                "pyright",       -- python
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -42,6 +43,8 @@ return {
                 "lua_ls",             -- lua linter
                 "clang-format",       -- c, c++, objc formatter
                 "google-java-format", -- java formatter
+                "mypy",               -- python
+                "ruff",               -- python
             },
             -- auto-install configured formatters & linters (with null-ls)
             automatic_installation = true,

@@ -18,10 +18,16 @@ map("i", "<C-s>", "<cmd>wa!<CR>", {
 map("n", "<C-s>", "<cmd>wa!<CR>", {
     desc = "Write all buffers",
 })
-map("i", "<C-q>", "<cmd>qa<CR>", {
+map("i", "<C-Q>", "<cmd>qa<CR>", {
     desc = "Quit all buffers",
 })
-map("n", "<C-q>", "<cmd>qa<CR>", {
+map("n", "<C-Q>", "<cmd>qa<CR>", {
+    desc = "Quit all buffers",
+})
+map("i", "<C-q>", "<cmd>q<CR>", {
+    desc = "Quit all buffers",
+})
+map("n", "<C-q>", "<cmd>q<CR>", {
     desc = "Quit all buffers",
 })
 map("v", "d", '"_x"<esc>', {
@@ -256,27 +262,24 @@ map("n", "<leader>gR", "<cmd>Git restore<CR>", {
 })
 
 -- telescope
-map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {
+map("n", "<leader>ff", require("telescope.builtin").find_files, {
     desc = "Fuzzy search files",
 })
-map("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", {
+map("n", "<leader>fs", require("telescope.builtin").live_grep, {
     desc = "Fuzzy search in files",
 })
-map("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", {
+map("n", "<leader>fc", require("telescope.builtin").grep_string, {
     desc = "grep find in files",
 })
-map(
-    "n",
-    "<leader>fb",
-    "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ sorting_strategy = 'ascending', prompt_position = 'top' })<cr>",
-    {
-        desc = "Fuzzy search current buffer",
-    }
-)
-map("n", "<leader>fB", "<cmd>Telescope buffers<cr>", {
+map("n", "<leader>fb", function()
+    require("telescope.builtin").current_buffer_fuzzy_find({ sorting_strategy = "ascending", prompt_position = "top" })
+end, {
+    desc = "Fuzzy search current buffer",
+})
+map("n", "<leader>fB", require("telescope.builtin").buffers, {
     desc = "Fuzzy search buffers",
 })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", {
+map("n", "<leader>fh", require("telescope.builtin").help_tags, {
     desc = "Fuzzy search help tags",
 })
 map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", {

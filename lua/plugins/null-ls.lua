@@ -41,6 +41,8 @@ return {
                     end,
                 }),
                 diagnostics.jsonlint, -- json
+                diagnostics.mypy,     --python
+                diagnostics.ruff,     --python
             },
         })
     end,
