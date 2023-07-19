@@ -288,7 +288,13 @@ map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", {
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", {
     desc = "Fuzzy search zoxide history",
 })
-map("n", "K", require("hover").hover, {
+map("n", "K", "<cmd>Lspsaga hover_doc<cr>", {
+    desc = "Hover",
+})
+map("n", "<leader>lco", "<cmd>Lspsaga outgoing_calls<cr>", {
+    desc = "Hover",
+})
+map("n", "<leader>lci", "<cmd>Lspsaga incoming_calls<cr>", {
     desc = "Hover",
 })
 map("n", "<leader>u", "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", {
@@ -349,14 +355,13 @@ map("n", "<leader>-", "<C-x>", {
 })
 
 -- window
-map("n", "<leader>sv", "<C-w>v", {
-    desc = "Split window vertically",
-})
-map("n", "<leader>sh", "<C-w>s", {
-    desc = "Split window horizontally",
-})
 map("n", "<leader>m", "<cmd>Glow<CR>", {
     desc = "Markdown preview",
+})
+
+-- Format
+map("n", "<leader>F", "<cmd>GuardFmt<CR>", {
+    desc = "Format buffer",
 })
 
 -- Prime

@@ -2,6 +2,8 @@ local opt = vim.opt
 
 vim.o.completeopt = "menuone,noinsert,noselect"
 vim.wo.signcolumn = "yes"
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- disable mouse
 opt.mouse = ""

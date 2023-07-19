@@ -1,6 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-context" },
+    dependencies = { "nvim-treesitter/nvim-treesitter-context", "nvim-treesitter/nvim-treesitter-refactor" },
     build = function()
         local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
         ts_update()

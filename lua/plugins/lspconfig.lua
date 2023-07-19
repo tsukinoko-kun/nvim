@@ -11,18 +11,7 @@ return {
         {
             "saecki/crates.nvim",
             event = { "BufRead Cargo.toml" },
-            dependencies = { "nvim-lua/plenary.nvim", "jose-elias-alvarez/null-ls.nvim" },
-            config = function()
-                require("crates").setup({
-                    null_ls = {
-                        enabled = true,
-                        name = "crates.nvim",
-                    },
-                })
-            end,
-        },
-        {
-            "smjonas/inc-rename.nvim",
+            dependencies = { "nvim-lua/plenary.nvim" },
             config = true,
         },
     },
@@ -33,9 +22,7 @@ return {
 
         -- enable keybinds only for when lsp server available
         local on_attach = function(client, bufnr)
-            if client.name ~= "null-ls" and client.name ~= nil then
-                print("LS " .. client.name .. " attached")
-            end
+            print("LS " .. client.name .. " attached")
 
             -- if client.server_capabilities.inlayHintProvider then
             --     vim.lsp.buf.inlay_hint(bufnr, true)
@@ -55,8 +42,8 @@ return {
             map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Go to definition" })
             map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementation" })
             map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
-            map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Show code actions" })
-            map("n", "<leader>lr", ":IncRename ", { desc = "Rename symbol" })
+            map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Show code actions" })
+            map("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "Rename symbol" })
             map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
             map(
                 "n",
