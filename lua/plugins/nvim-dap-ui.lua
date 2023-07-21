@@ -3,6 +3,8 @@ return {
     event = "VeryLazy",
     dependencies = {
         "mfussenegger/nvim-dap",
+        "theHamsta/nvim-dap-virtual-text",
+        "leoluz/nvim-dap-go",
     },
     config = function()
         local dap = require("dap")
