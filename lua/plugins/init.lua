@@ -5,11 +5,12 @@ return {
     -- My plugins here
 
     { "github/copilot.vim" },
-    { "kkharji/sqlite.lua" },                   -- sqlite3 for lua
-    "ericbn/vim-relativize",                    -- relative line numbers
-    { "numToStr/Comment.nvim",  config = true }, -- commenting with gc
-    "gpanders/editorconfig.nvim",               -- editorconfig support
-    "nvim-tree/nvim-web-devicons",              -- vs-code like icons
+    { "kkharji/sqlite.lua" },                      -- sqlite3 for lua
+    "ericbn/vim-relativize",                       -- relative line numbers
+    { "numToStr/Comment.nvim",  config = true },   -- commenting with gc
+    "gpanders/editorconfig.nvim",                  -- editorconfig support
+    "nvim-tree/nvim-web-devicons",                 -- vs-code like icons
+    "sitiom/nvim-numbertoggle",                    -- toggle relative line numbers
     {
         "glepnir/nerdicons.nvim",
         config = true,

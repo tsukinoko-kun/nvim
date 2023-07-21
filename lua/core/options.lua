@@ -5,6 +5,9 @@ vim.wo.signcolumn = "yes"
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 
+-- disable auto folding
+vim.cmd("set nofoldenable")
+
 -- disable mouse
 opt.mouse = ""
 
