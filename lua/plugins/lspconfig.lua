@@ -1,9 +1,9 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",               -- for autocompletion
+        "hrsh7th/cmp-nvim-lsp", -- for autocompletion
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
-        "p00f/clangd_extensions.nvim",        -- additional functionality for clangd server (e.g. rename file & update imports)
+        "p00f/clangd_extensions.nvim", -- additional functionality for clangd server (e.g. rename file & update imports)
         {
             "simrat39/rust-tools.nvim",
             dependencies = { "neovim/nvim-lspconfig" },
@@ -123,6 +123,22 @@ return {
                             [vim.fn.stdpath("config") .. "/lua"] = true,
                         },
                     },
+                },
+            },
+        })
+
+        lspconfig["gopls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            cmd = { "gopls" },
+            filetypes = { "go", "gomod", "gowork", "gotmpl" },
+            root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+            settings = {
+                gopls = {
+                    completeUnimported = true,
+                    analyses = {
+                        unusedparams = true,
+                    }
                 },
             },
         })

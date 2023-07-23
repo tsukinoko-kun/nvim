@@ -48,5 +48,14 @@ return {
     "tpope/vim-fugitive", -- git commands in vim
     "kdheepak/lazygit.nvim", -- lazygit in vim
     "ThePrimeagen/git-worktree.nvim", -- git worktree integration
-    "mg979/vim-visual-multi",
+
+    -- Go
+    {
+        "olexsmir/gopher.nvim",
+        ft = "go",
+        config = true,
+        build = function()
+            vim.cmd([[silent! GoInstallDeps]])
+        end,
+    },
 }
