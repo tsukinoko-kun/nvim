@@ -10,7 +10,6 @@
 -   [npm](https://nodejs.org)
 -   [lldb](https://lldb.llvm.org)
 -   [rustup](https://rustup.rs)
-    - `rustup component add rust-analyzer`
 -   [go](https://go.dev/)
 -   [pip3](https://www.python.org/downloads)
 -   [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
