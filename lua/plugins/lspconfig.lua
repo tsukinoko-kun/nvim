@@ -4,6 +4,7 @@ return {
         "hrsh7th/cmp-nvim-lsp", -- for autocompletion
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
         "p00f/clangd_extensions.nvim", -- additional functionality for clangd server (e.g. rename file & update imports)
+        "williamboman/mason-lspconfig.nvim",
         {
             "simrat39/rust-tools.nvim",
             dependencies = { "neovim/nvim-lspconfig" },
@@ -83,8 +84,16 @@ return {
         -- used to enable autocompletion (assign to every lsp server config)
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
+        require("mason-lspconfig").setup_handlers({
+            function(server_name)
+                lspconfig[server_name].setup({
+                    capabilities = capabilities,
+                })
+            end,
+        })
+
         -- Change the Diagnostic symbols in the sign column (gutter)
-        local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
+        local signs = { Error = "", Warn = "", Hint = "", Info = "" }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -138,7 +147,7 @@ return {
                     completeUnimported = true,
                     analyses = {
                         unusedparams = true,
-                    }
+                    },
                 },
             },
         })
