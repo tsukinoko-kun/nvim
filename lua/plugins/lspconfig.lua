@@ -5,6 +5,9 @@ return {
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
         "p00f/clangd_extensions.nvim", -- additional functionality for clangd server (e.g. rename file & update imports)
         "williamboman/mason-lspconfig.nvim",
+        "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
+        "williamboman/mason-lspconfig.nvim",
         {
             "simrat39/rust-tools.nvim",
             dependencies = { "neovim/nvim-lspconfig" },
@@ -17,9 +20,21 @@ return {
         },
     },
     config = function()
+        local function has_value(tab, val)
+            for _, value in ipairs(tab) do
+                if value == val then
+                    return true
+                end
+            end
+            return false
+        end
+
         local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local typescript = require("typescript")
+        local mason = require("mason")
+        mason.setup()
+        local mason_lspconfig = require("mason-lspconfig")
 
         -- enable keybinds only for when lsp server available
         local on_attach = function(client, bufnr)
@@ -84,12 +99,88 @@ return {
         -- used to enable autocompletion (assign to every lsp server config)
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
+        local setup_lsp = { "lua_ls", "gopls", "rust_analyzer", "jdtls", "tsserver", "astro", "pyright", "clangd" }
         require("mason-lspconfig").setup_handlers({
             function(server_name)
-                lspconfig[server_name].setup({
-                    capabilities = capabilities,
-                })
+                if not has_value(setup_lsp, server_name) then
+                    table.insert(setup_lsp, server_name)
+                    lspconfig[server_name].setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                    })
+                end
             end,
+        })
+
+        typescript.setup({
+            disable_commands = false, -- prevent the plugin from creating Vim commands
+            debug = false, -- enable debug logging for commands
+            go_to_source_definition = {
+                fallback = true, -- fall back to standard LSP definition on failure
+            },
+            server = {
+                capabilities = capabilities,
+                on_attach = on_attach,
+                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+                init_options = {
+                    preferences = {
+                        includeInlayParameterNameHints = "all",
+                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                        includeInlayFunctionParameterTypeHints = true,
+                        includeInlayVariableTypeHints = true,
+                        includeInlayPropertyDeclarationTypeHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayEnumMemberValueHints = true,
+                        importModuleSpecifierPreference = "non-relative",
+                    },
+                },
+                settings = {
+                    typescript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        },
+                    },
+                    javascript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        },
+                    },
+                },
+            },
+        })
+
+        mason_lspconfig.setup({
+            -- list of servers for mason to install
+            ensure_installed = {
+                "rust_analyzer", -- rust
+                "astro", -- astro
+                "clangd", -- c, c++, objc
+                "tsserver", -- ts/js
+                "gopls", -- go
+                "html", -- html
+                "cssls", -- css, scss, less
+                "lua_ls", -- lua
+                "jsonls", -- json
+                "marksman", -- markdown
+                "yamlls", -- yaml
+                "lemminx", -- xml
+                "jdtls", -- java
+                "pyright", -- python
+            },
+            -- auto-install configured servers (with lspconfig)
+            automatic_installation = true, -- not the same as ensure_installed
         })
 
         -- Change the Diagnostic symbols in the sign column (gutter)
@@ -99,22 +190,11 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        -- configure html server
-        lspconfig["html"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        -- configure css server
-        lspconfig["cssls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            filetypes = { "lua" },
             settings = {
                 -- custom settings for lua
                 Lua = {
@@ -147,6 +227,15 @@ return {
                     completeUnimported = true,
                     analyses = {
                         unusedparams = true,
+                    },
+                    hints = {
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        compositeLiteralTypes = true,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = true,
+                        rangeVariableTypes = true,
                     },
                 },
             },
@@ -252,77 +341,11 @@ return {
             },
         })
 
-        lspconfig.gopls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = {
-                gopls = {
-                    hints = {
-                        assignVariableTypes = true,
-                        compositeLiteralFields = true,
-                        compositeLiteralTypes = true,
-                        constantValues = true,
-                        functionTypeParameters = true,
-                        parameterNames = true,
-                        rangeVariableTypes = true,
-                    },
-                },
-            },
-        })
-
-        -- configure typescript server with plugin
-        typescript.setup({
-            server = {
-                capabilities = capabilities,
-                on_attach = on_attach,
-            },
-        })
-
-        lspconfig.tsserver.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            init_options = {
-                preferences = {
-                    includeInlayParameterNameHints = "all",
-                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                    includeInlayFunctionParameterTypeHints = true,
-                    includeInlayVariableTypeHints = true,
-                    includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayFunctionLikeReturnTypeHints = true,
-                    includeInlayEnumMemberValueHints = true,
-                    importModuleSpecifierPreference = "non-relative",
-                },
-            },
-            settings = {
-                typescript = {
-                    inlayHints = {
-                        includeInlayParameterNameHints = "all",
-                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                        includeInlayFunctionParameterTypeHints = true,
-                        includeInlayVariableTypeHints = true,
-                        includeInlayPropertyDeclarationTypeHints = true,
-                        includeInlayFunctionLikeReturnTypeHints = true,
-                        includeInlayEnumMemberValueHints = true,
-                    },
-                },
-                javascript = {
-                    inlayHints = {
-                        includeInlayParameterNameHints = "all",
-                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                        includeInlayFunctionParameterTypeHints = true,
-                        includeInlayVariableTypeHints = true,
-                        includeInlayPropertyDeclarationTypeHints = true,
-                        includeInlayFunctionLikeReturnTypeHints = true,
-                        includeInlayEnumMemberValueHints = true,
-                    },
-                },
-            },
-        })
-
         -- configure astro server
         lspconfig["astro"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            filetypes = { "astro" },
             settings = {
                 astro = {
                     cmd = { "astro-ls", "--stdio" },
