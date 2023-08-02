@@ -358,6 +358,12 @@ map("n", "<leader>-", "<C-x>", {
 map("n", "<leader>m", "<cmd>Glow<CR>", {
     desc = "Markdown preview",
 })
+map("n", '<c-w>"', "<cmd>split<CR>", {
+    desc = "Split window horizontally",
+})
+map("n", "<c-w>%", "<cmd>vsplit<CR>", {
+    desc = "Split window vertically",
+})
 
 -- Format
 map("n", "<leader>F", "<cmd>GuardFmt<CR>", {
