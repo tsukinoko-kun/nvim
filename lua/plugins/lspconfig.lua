@@ -99,7 +99,8 @@ return {
         -- used to enable autocompletion (assign to every lsp server config)
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        local setup_lsp = { "lua_ls", "gopls", "rust_analyzer", "jdtls", "tsserver", "astro", "pyright", "clangd" }
+        local setup_lsp =
+            { "lua_ls", "gopls", "rust_analyzer", "jdtls", "tsserver", "astro", "tailwindcss", "pyright", "clangd" }
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 if not has_value(setup_lsp, server_name) then
@@ -171,6 +172,7 @@ return {
                 "gopls", -- go
                 "html", -- html
                 "cssls", -- css, scss, less
+                "tailwindcss", -- tailwind
                 "lua_ls", -- lua
                 "jsonls", -- json
                 "marksman", -- markdown
@@ -362,6 +364,20 @@ return {
                     -- 	"astro.config.cjs",
                     -- 	"package.json"
                     -- ),
+                },
+            },
+        })
+
+        -- configure tailwind server
+        lspconfig["tailwindcss"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "astro", "html", "javascriptreact", "typescriptreact", "svelte" },
+            settings = {
+                tailwindCSS = {
+                    files = {
+                        exclude = { "node_modules", ".git", "dist", "build", ".cache", ".next" },
+                    },
                 },
             },
         })
