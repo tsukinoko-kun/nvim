@@ -6,7 +6,9 @@ return {
         ft("lua"):fmt("stylua")
         ft("go"):fmt("lsp"):append("golines")
         ft("rust"):fmt("rustfmt")
-        ft("javascript,typescript"):fmt("prettier")
+        ft(
+            "astro,javascript,javascriptreact,typescript,typescriptreact,json,jsonc,html,vue,css,scss,less,graphql,markdown,mdx,yaml"
+        ):fmt("prettier")
 
         require("guard").setup({
             -- the only option for the setup function
