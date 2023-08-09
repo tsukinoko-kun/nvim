@@ -3,6 +3,7 @@ return {
     dependencies = {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- dependency for better sorting performance
         { "nvim-telescope/telescope-ui-select.nvim" }, -- for showing lsp code actions
+        { "simrat39/symbols-outline.nvim", config = true }, -- for showing symbols outline
     },
     init = function()
         local telescope = require("telescope")
