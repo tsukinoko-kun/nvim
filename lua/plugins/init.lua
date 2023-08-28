@@ -4,6 +4,8 @@ return {
 
     -- My plugins here
 
+    "github/copilot.vim",
+
     "kkharji/sqlite.lua", -- sqlite3 for lua
     "ericbn/vim-relativize", -- relative line numbers
     { "numToStr/Comment.nvim", config = true }, -- commenting with gc
