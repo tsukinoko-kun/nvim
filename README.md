@@ -4,6 +4,7 @@
 
 -   [make](https://www.gnu.org/software/make/)
 -   unzip
+-   [fzf](https://github.com/junegunn/fzf)
 -   true color terminal emulator like [Alacritty](https://alacritty.org) or [Kitty](https://sw.kovidgoyal.net/kitty/)
 -   [ripgrep](https://github.com/BurntSushi/ripgrep)
 -   [lazygit](https://github.com/jesseduffield/lazygit)
