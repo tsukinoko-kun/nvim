@@ -265,7 +265,7 @@ map("n", "<leader>gR", "<cmd>Git restore<CR>", {
 map("n", "<leader>ff", require("telescope.builtin").find_files, {
     desc = "Fuzzy search files",
 })
-map("n", "<leader>fF", require("telescope.builtin").live_grep, {
+map("n", "<leader>fs", require("telescope.builtin").live_grep, {
     desc = "Fuzzy search in files",
 })
 map("n", "<leader>fc", require("telescope.builtin").grep_string, {
@@ -387,6 +387,6 @@ map("n", "<C-u>", "<C-u>zz", {
     desc = "Scroll up",
 })
 
-map("n", "<leader>fs", "<cmd>SymbolsOutline<CR>", {
+map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", {
     desc = "LSP symbols",
 })
