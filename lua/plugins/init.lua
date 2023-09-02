@@ -4,6 +4,11 @@ return {
 
     -- My plugins here
 
+    {
+        "stevearc/dressing.nvim",
+        opts = {},
+        event = "VeryLazy",
+    },
     "kkharji/sqlite.lua", -- sqlite3 for lua
     "ericbn/vim-relativize", -- relative line numbers
     { "numToStr/Comment.nvim", config = true }, -- commenting with gc
