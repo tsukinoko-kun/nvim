@@ -5,14 +5,6 @@ return {
     -- My plugins here
 
     {
-        "marilari88/twoslash-queries.nvim",
-        opts = {
-            multi_line = true,
-            is_enabled = false,
-            highlight = "Type",
-        },
-    },
-    {
         "stevearc/dressing.nvim",
         opts = {},
         event = "VeryLazy",

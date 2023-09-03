@@ -74,7 +74,6 @@ return {
 
             -- typescript specific keymaps (e.g. rename file and update imports)
             if client.name == "tsserver" then
-                require("twoslash-queries").attach(client, bufnr)
                 map("n", "<leader>lrf", ":TypescriptRenameFile<CR>", { desc = "Rename file and update imports" })
                 map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
                 map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
