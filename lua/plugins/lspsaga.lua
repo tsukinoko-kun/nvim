@@ -3,8 +3,8 @@ return {
     opts = {
         ui = {
             code_action = "",
-            sign = false,
-            virtual_text = true,
+            sign = true,
+            virtual_text = false,
         },
     },
     dependencies = {
