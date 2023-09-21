@@ -58,8 +58,8 @@ return {
             map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Go to definition" })
             map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementation" })
             map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
-            map({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "Show code actions" })
-            map("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "Rename symbol" })
+            map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Show code actions" })
+            map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
             map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Show diagnostics for current line" })
             map(
                 "n",

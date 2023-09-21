@@ -288,13 +288,13 @@ map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", {
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", {
     desc = "Fuzzy search zoxide history",
 })
-map("n", "K", "<cmd>Lspsaga hover_doc<cr>", {
+map("n", "K", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", {
     desc = "Hover",
 })
-map("n", "<leader>lco", "<cmd>Lspsaga outgoing_calls<cr>", {
+map("n", "<leader>lco", "<cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>", {
     desc = "Hover",
 })
-map("n", "<leader>lci", "<cmd>Lspsaga incoming_calls<cr>", {
+map("n", "<leader>lci", "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>", {
     desc = "Hover",
 })
 map("n", "<leader>u", "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", {
