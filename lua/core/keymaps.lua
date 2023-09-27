@@ -288,7 +288,7 @@ map("n", "<leader>p", "<cmd>Telescope neoclip<cr>", {
 map("n", "<leader>z", "<cmd>Telescope zoxide list<cr>", {
     desc = "Fuzzy search zoxide history",
 })
-map("n", "K", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", {
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {
     desc = "Hover",
 })
 map("n", "<leader>lco", "<cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>", {
@@ -297,10 +297,17 @@ map("n", "<leader>lco", "<cmd>lua require('telescope.builtin').lsp_outgoing_call
 map("n", "<leader>lci", "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>", {
     desc = "Hover",
 })
+
+-- ect
 map("n", "<leader>u", "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", {
     desc = "Toggle undo tree",
 })
 -- map("n", "gK", require("hover").hover_select, { desc = "Hover select" })
+map("n", "<leader>i", function()
+    vim.lsp.inlay_hint(0, nil)
+end, {
+    desc = "Toggle inlay hints",
+})
 
 -- harpoon
 map("n", "<leader>hh", "<cmd>Telescope harpoon marks<cr>", {
@@ -344,14 +351,6 @@ map("n", "<leader>h8", '<cmd>lua require("harpoon.ui").nav_file(8)<cr>', {
 })
 map("n", "<leader>h9", '<cmd>lua require("harpoon.ui").nav_file(9)<cr>', {
     desc = "Navigate to Harpoon mark 9",
-})
-
--- increment/decrement numbers
-map("n", "<leader>+", "<C-a>", {
-    desc = "Increment number",
-})
-map("n", "<leader>-", "<C-x>", {
-    desc = "Decrement number",
 })
 
 -- window

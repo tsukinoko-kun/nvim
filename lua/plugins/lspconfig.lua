@@ -3,11 +3,9 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp", -- for autocompletion
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
-        "p00f/clangd_extensions.nvim", -- additional functionality for clangd server (e.g. rename file & update imports)
         "williamboman/mason-lspconfig.nvim",
         "williamboman/mason.nvim",
         "jay-babu/mason-nvim-dap.nvim",
-        "williamboman/mason-lspconfig.nvim",
         {
             "simrat39/rust-tools.nvim",
             dependencies = { "neovim/nvim-lspconfig" },
@@ -20,6 +18,8 @@ return {
         },
     },
     config = function()
+        local util = require("lspconfig.util")
+
         local function has_value(tab, val)
             for _, value in ipairs(tab) do
                 if value == val then
@@ -79,11 +79,6 @@ return {
                 map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
             end
 
-            -- c / c++ specific keymaps (e.g. toggle header/source)
-            if client.name == "clangd" then
-                map("n", "gh", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle header/source" })
-            end
-
             if client.name == "rust_analyzer" then
                 local rt = require("rust-tools")
                 rt.inlay_hints.set()
@@ -100,7 +95,7 @@ return {
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
         local setup_lsp =
-            { "lua_ls", "gopls", "rust_analyzer", "jdtls", "tsserver", "astro", "tailwindcss", "pyright", "clangd" }
+            { "lua_ls", "gopls", "rust_analyzer", "jdtls", "tsserver", "astro", "tailwindcss", "pyright", "ccls" }
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 if not has_value(setup_lsp, server_name) then
@@ -167,7 +162,6 @@ return {
             ensure_installed = {
                 "rust_analyzer", -- rust
                 "astro", -- astro
-                "clangd", -- c, c++, objc
                 "tsserver", -- ts/js
                 "gopls", -- go
                 "html", -- html
@@ -193,7 +187,7 @@ return {
         end
 
         -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
+        lspconfig.lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
             filetypes = { "lua" },
@@ -218,11 +212,11 @@ return {
             },
         })
 
-        lspconfig["gopls"].setup({
+        lspconfig.gopls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
             cmd = { "gopls" },
-            filetypes = { "go", "gomod", "gowork", "gotmpl" },
+            filetypes = { "go", "gomod", "gowork", "gotmpl", "WORKSPACE", "WORKSPACE.bazel" },
             root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
             settings = {
                 gopls = {
@@ -250,12 +244,7 @@ return {
                     use_telescope = true,
                 },
                 inlay_hints = {
-                    auto = true,
-                    only_current_line = false,
-                    show_parameter_hints = true,
-                    max_len_align = false,
-                    max_len_align_padding = 1,
-                    highlight = "Comment",
+                    auto = false,
                 },
                 cargo = {
                     all_features = true,
@@ -389,85 +378,55 @@ return {
             filetypes = { "python" },
         })
 
-        -- configure c/c++ server
-        lspconfig["clangd"].setup({
+        lspconfig.tsserver.setup({
             capabilities = capabilities,
             on_attach = on_attach,
-            settings = {
-                clangd = {
-                    compileCommandsDir = "build",
-                    root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")
-                        or lspconfig.util.path.dirname,
-                    filetypes = { "c", "h", "hpp", "cpp", "cpi", "objc", "objcpp" },
-                    single_file_support = true,
+            filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+            javascript = {
+                javascript = {
+                    inlayHints = {
+                        includeInlayEnumMemberValueHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayFunctionParameterTypeHints = true,
+                        includeInlayParameterNameHints = "all",
+                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                        includeInlayPropertyDeclarationTypeHints = true,
+                        includeInlayVariableTypeHints = true,
+                    },
+                },
+                typescript = {
+                    inlayHints = {
+                        includeInlayEnumMemberValueHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayFunctionParameterTypeHints = true,
+                        includeInlayParameterNameHints = "all",
+                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                        includeInlayPropertyDeclarationTypeHints = true,
+                        includeInlayVariableTypeHints = true,
+                    },
                 },
             },
         })
-        require("clangd_extensions").setup({
-            server = { capabilities = capabilities, on_attach = on_attach },
-            extensions = {
-                -- defaults:
-                -- Automatically set inlay hints (type hints)
-                autoSetHints = true,
-                -- These apply to the default ClangdSetInlayHints command
-                inlay_hints = {
-                    inline = vim.fn.has("nvim-0.10") == 1,
-                    -- Only show inlay hints for the current line
-                    only_current_line = false,
-                    -- Event which triggers a refersh of the inlay hints.
-                    -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
-                    -- not that this may cause  higher CPU usage.
-                    -- This option is only respected when only_current_line and
-                    -- autoSetHints both are true.
-                    only_current_line_autocmd = "CursorHold",
-                    -- whether to show parameter hints with the inlay hints or not
-                    show_parameter_hints = true,
-                    -- prefix for parameter hints
-                    parameter_hints_prefix = "<- ",
-                    -- prefix for all the other hints (type, chaining)
-                    other_hints_prefix = "=> ",
-                    -- whether to align to the length of the longest line in the file
-                    max_len_align = false,
-                    -- padding from the left if max_len_align is true
-                    max_len_align_padding = 1,
-                    -- whether to align to the extreme right or not
-                    right_align = false,
-                    -- padding from the right if right_align is true
-                    right_align_padding = 7,
-                    -- The color of the hints
-                    highlight = "Comment",
-                    -- The highlight group priority for extmark
-                    priority = 100,
-                },
-                ast = {
-                    role_icons = {
-                        type = "",
-                        declaration = "",
-                        expression = "",
-                        specifier = "",
-                        statement = "",
-                        ["template argument"] = "",
-                    },
-                    kind_icons = {
-                        Compound = "",
-                        Recovery = "",
-                        TranslationUnit = "",
-                        PackExpansion = "",
-                        TemplateTypeParm = "",
-                        TemplateTemplateParm = "",
-                        TemplateParamObject = "",
-                    },
-                    highlights = {
-                        detail = "Comment",
-                    },
-                },
-                memory_usage = {
-                    border = "none",
-                },
-                symbol_info = {
-                    border = "none",
+
+        -- configure c/c++ server
+        lspconfig.ccls.setup({
+            filetypes = { "c", "cpp", "cc", "objc", "objcpp", "opencl" },
+            root_dir = function(fname)
+                return util.root_pattern(
+                    "compile_commands.json",
+                    "compile_flags.txt",
+                    ".git",
+                    "WORKSPACE",
+                    "WORKSPACE.bazel"
+                )(fname) or util.find_git_ancestor(fname)
+            end,
+            init_options = {
+                cache = {
+                    directory = ".ccls-cache",
                 },
             },
+            capabilities = capabilities,
+            on_attach = on_attach,
         })
     end,
 }

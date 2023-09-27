@@ -4,6 +4,7 @@ return {
 
     -- My plugins here
 
+    "github/copilot.vim",
     {
         "stevearc/dressing.nvim",
         opts = {},
