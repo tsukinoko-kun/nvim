@@ -365,7 +365,13 @@ map("n", "<c-w>%", "<cmd>vsplit<CR>", {
 })
 
 -- Format
-map("n", "<leader>F", "<cmd>GuardFmt<CR>", {
+map({"n", "v"}, "<leader>F", function ()
+    require("conform").format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+    })
+end, {
     desc = "Format buffer",
 })
 
