@@ -3,7 +3,7 @@ return {
     lazy = true,
     opts = {
         formatters_by_ft = {
-            javascript = { { "eslint_d", "eslint", "prettierd", "prettier" } },
+            javascript = { { "eslint", "prettierd", "prettier" } },
             typescript = { { "prettierd", "prettier" } },
             typescriptreact = { { "prettierd", "prettier" } },
             json = { { "prettierd", "prettier" } },

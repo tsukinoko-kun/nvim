@@ -365,7 +365,7 @@ map("n", "<c-w>%", "<cmd>vsplit<CR>", {
 })
 
 -- Format
-map({"n", "v"}, "<leader>F", function ()
+map({ "n", "v" }, "<leader>F", function()
     require("conform").format({
         lsp_fallback = true,
         async = false,
@@ -373,6 +373,11 @@ map({"n", "v"}, "<leader>F", function ()
     })
 end, {
     desc = "Format buffer",
+})
+map("n", "<leader>L", function()
+    require("lint").try_lint()
+end, {
+    desc = "Lint buffer",
 })
 
 -- Prime
