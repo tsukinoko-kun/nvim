@@ -1,13 +1,4 @@
-local function map(mode, lhs, rhs, opts)
-    local options = {
-        noremap = true,
-        silent = true,
-    }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
-end
+local map = require("utils").map
 
 -- remove highlight on escape (additionally to default <esc> behaviour)
 map("n", "<esc>", "<cmd>noh<cr><esc>")
@@ -227,7 +218,7 @@ vim.keymap.set("n", "di", '"_di')
 
 -- explorer
 map("n", "-", require("oil").open, { desc = "Open parent directory" })
-map("n", "<leader>t", require("trouble").toggle, { desc = "Toggle trouble list" })
+map("n", "<leader>T", require("trouble").toggle, { desc = "Toggle trouble list" })
 
 -- git
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
