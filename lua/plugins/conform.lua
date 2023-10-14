@@ -13,7 +13,7 @@ return {
             scss = { { "prettierd", "prettier" } },
             markdown = { { "prettierd", "prettier" } },
             lua = { "stylua" },
-            java = { { "google-java-format", "astyle" } },
+            java = { "google-java-format" },
             cpp = { { "clang-format", "astyle" } },
             rust = { { "rustfmt", "rustfmt-nightly" } },
             python = { "black" },

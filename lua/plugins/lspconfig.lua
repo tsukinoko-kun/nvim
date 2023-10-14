@@ -37,15 +37,19 @@ return {
         local mason_lspconfig = require("mason-lspconfig")
 
         -- enable keybinds only for when lsp server available
-        local on_attach = function(client, bufnr)
+        local on_attach_default = function(client, bufnr)
             print("LS " .. client.name .. " attached")
 
-            -- if client.server_capabilities.inlayHintProvider then
-            --     vim.lsp.buf.inlay_hint(bufnr, true)
-            -- end
+            if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint(bufnr, true)
+            end
 
             local function map(mode, lhs, rhs, opts)
-                local options = { noremap = true, silent = true, buffer = bufnr }
+                local options = {
+                    noremap = true,
+                    silent = true,
+                    buffer = bufnr,
+                }
                 if opts then
                     options = vim.tbl_extend("force", options, opts)
                 end
@@ -102,7 +106,7 @@ return {
                     table.insert(setup_lsp, server_name)
                     lspconfig[server_name].setup({
                         capabilities = capabilities,
-                        on_attach = on_attach,
+                        on_attach = on_attach_default,
                     })
                 end
             end,
@@ -116,7 +120,7 @@ return {
             },
             server = {
                 capabilities = capabilities,
-                on_attach = on_attach,
+                on_attach = on_attach_default,
                 filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
                 init_options = {
                     preferences = {
@@ -189,7 +193,7 @@ return {
         -- configure lua server (with special settings)
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             filetypes = { "lua" },
             settings = {
                 -- custom settings for lua
@@ -214,7 +218,7 @@ return {
 
         lspconfig.gopls.setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             cmd = { "gopls" },
             filetypes = { "go", "gomod", "gowork", "gotmpl", "WORKSPACE", "WORKSPACE.bazel" },
             root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
@@ -251,7 +255,7 @@ return {
                 },
             },
             server = {
-                on_attach = on_attach,
+                on_attach = on_attach_default,
                 capabilities = capabilities,
                 cmd = { "rustup", "run", "stable", "rust-analyzer" },
                 standalone = false,
@@ -291,7 +295,7 @@ return {
 
         lspconfig.jdtls.setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             cmd = { "jdtls" },
             filetypes = { "java" },
             root_dir = lspconfig.util.root_pattern("pom.xml", "build.gradle", ".git"),
@@ -299,6 +303,11 @@ return {
                 bundles = {},
             },
             settings = {
+                inlayHints = {
+                    parameterNames = {
+                        enabled = "all",
+                    },
+                },
                 java = {
                     signatureHelp = { enabled = true },
                     eclipse = {
@@ -335,7 +344,7 @@ return {
         -- configure astro server
         lspconfig["astro"].setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             filetypes = { "astro" },
             settings = {
                 astro = {
@@ -360,7 +369,7 @@ return {
         -- configure tailwind server
         lspconfig["tailwindcss"].setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             filetypes = { "astro", "html", "javascriptreact", "typescriptreact", "svelte" },
             settings = {
                 tailwindCSS = {
@@ -374,13 +383,13 @@ return {
         -- configure python server
         lspconfig["pyright"].setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             filetypes = { "python" },
         })
 
         lspconfig.tsserver.setup({
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
             filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
             javascript = {
                 javascript = {
@@ -426,7 +435,7 @@ return {
                 },
             },
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = on_attach_default,
         })
     end,
 }

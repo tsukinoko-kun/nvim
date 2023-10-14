@@ -92,14 +92,14 @@ return {
 
         -- add textobject mappings
         local actions = { "Change", "Delete", "Yank", "Cut" }
-        local action_keys = { "c", "d", "y", "x" }
+        local action_lhs = { "c", "d", "y", "x" }
+        local action_rhs = { '"_c', '"_x"<esc>', "y", "d" }
         local map = function(select, desc)
             local options = { noremap = true, silent = true }
             for i, action_desc in ipairs(actions) do
-                local action = action_keys[i]
                 local opts = vim.tbl_extend("force", options, { desc = action_desc .. " " .. desc })
-                local lhs = action .. select
-                local rhs = ":normal v" .. select .. "<CR>" .. action
+                local lhs = action_lhs[i] .. select
+                local rhs = ":normal v" .. select .. "<CR>" .. action_rhs[i]
                 vim.keymap.set("n", lhs, rhs, opts)
             end
         end
@@ -137,7 +137,9 @@ return {
             -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
             separator = nil,
             zindex = 20, -- The Z-index of the context window
-            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+            on_attach = function ()
+                return true
+            end, -- (fun(buf: integer): boolean) return false to disable attaching
         })
     end,
 }
