@@ -45,6 +45,10 @@ return {
             end
 
             local function map(mode, lhs, rhs, opts)
+                if rhs == nil then
+                    print("No rhs for " .. opts.desc)
+                    return
+                end
                 local options = {
                     noremap = true,
                     silent = true,
@@ -74,7 +78,6 @@ return {
             map("n", "<leader>lgD", vim.diagnostic.goto_prev, { desc = "Jump to previous diagnostic" })
             map("n", "<leader>lgd", vim.diagnostic.goto_next, { desc = "Jump to next diagnostic" })
             map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
-            map("n", "<leader>lF", vim.lsp.buf.range_formatting, { desc = "Format selection" })
 
             -- typescript specific keymaps (e.g. rename file and update imports)
             if client.name == "tsserver" then
