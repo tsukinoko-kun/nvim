@@ -38,8 +38,6 @@ return {
 
         -- enable keybinds only for when lsp server available
         local on_attach_default = function(client, bufnr)
-            print("LS " .. client.name .. " attached")
-
             if client.server_capabilities.inlayHintProvider then
                 vim.lsp.inlay_hint(bufnr, true)
             end
