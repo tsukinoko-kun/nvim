@@ -14,7 +14,7 @@ require("core.keymaps")
 require("core.colorscheme")
 
 -- Autoformat on save
-AutoFormatActive = true
+AutoFormatActive = false
 
 local format = function()
     vim.cmd("silent! write")
