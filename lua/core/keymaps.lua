@@ -295,7 +295,7 @@ map("n", "<leader>u", "<cmd>UndotreeToggle<cr><cmd>UndotreeFocus<cr>", {
 })
 -- map("n", "gK", require("hover").hover_select, { desc = "Hover select" })
 map("n", "<leader>i", function()
-    vim.lsp.inlay_hint(0, nil)
+    vim.lsp.inlay_hint.enable(0, true)
 end, {
     desc = "Toggle inlay hints",
 })
