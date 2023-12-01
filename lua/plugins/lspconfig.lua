@@ -205,14 +205,14 @@ return {
                     },
                     -- make the language server recognize "vim" global
                     diagnostics = {
-                        globals = { "vim", "Selene" },
+                        globals = { "vim", "Yab" },
                     },
                     workspace = {
                         -- make language server aware of runtime files
                         library = {
                             vim.fn.expand("$VIMRUNTIME/lua"),
                             vim.fn.stdpath("config") .. "/lua",
-                            vim.fn.expand("$XDG_CONFIG_HOME/selene/lib"),
+                            vim.fn.expand("$XDG_CONFIG_HOME/yab/lib"),
                         },
                     },
                 },
@@ -223,7 +223,7 @@ return {
             capabilities = capabilities,
             on_attach = on_attach_default,
             cmd = { "gopls" },
-            filetypes = { "go", "gomod", "gowork", "gotmpl", "WORKSPACE", "WORKSPACE.bazel" },
+            filetypes = { "go", "mod" },
             root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
             settings = {
                 gopls = {
