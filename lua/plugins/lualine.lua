@@ -12,7 +12,15 @@ return {
                 lualine_b = { "branch", "diff", "diagnostics" },
                 lualine_c = { "filename" },
                 lualine_x = { git_blame.get_current_blame_text },
-                lualine_y = { "encoding", "fileformat", "filetype" },
+                lualine_y = {
+                    "encoding",
+                    "fileformat",
+                    {
+                        "filetype",
+                        colored = false,
+                        icon_only = false,
+                    },
+                },
                 lualine_z = { "location" },
             },
             options = {
