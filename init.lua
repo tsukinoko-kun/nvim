@@ -48,3 +48,8 @@ utils.map("n", "<leader>taf", function()
         print("Autoformat: OFF")
     end
 end)
+
+-- clear jump list autocmd VimEnter
+vim.cmd([[
+    autocmd VimEnter * :clearjumps
+]])
