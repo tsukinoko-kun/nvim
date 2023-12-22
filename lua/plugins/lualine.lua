@@ -1,17 +1,27 @@
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-        "f-person/git-blame.nvim",
+        "arkav/lualine-lsp-progress",
     },
     config = function()
-        local git_blame = require("gitblame")
-        vim.g.gitblame_display_virtual_text = 0
         require("lualine").setup({
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "filename" },
-                lualine_x = { git_blame.get_current_blame_text },
+                lualine_c = {
+                    function()
+                        -- relative file path from project root
+                        local filename = vim.fn.expand("%")
+                        if vim.bo.readonly then
+                            filename = filename .. " [RO]"
+                        end
+                        if vim.bo.modified then
+                            filename = filename .. " [+]"
+                        end
+                        return filename
+                    end,
+                    "lsp_progress",
+                },
                 lualine_y = {
                     "encoding",
                     "fileformat",

@@ -227,29 +227,33 @@ map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
 map("n", "<leader>gp", "<cmd>Git pull<CR>", {
     desc = "Git pull",
 })
-map("n", "<leader>gP", "<cmd>Git push<CR>", {
-    desc = "Git push",
-})
-map("n", "<leader>gc", "<cmd>Git commit -v<CR>", {
-    desc = "Git commit",
-})
 map("n", "<leader>gb", "<cmd>Git branch<CR>", {
     desc = "Git branch",
 })
-map("n", "<leader>gs", "<cmd>Git status<CR>", {
-    desc = "Git status",
+map("n", "<leader>gL", function()
+    require("gitsigns").toggle_linehl()
+    require("gitsigns").toggle_word_diff()
+    require("gitsigns").toggle_current_line_blame()
+end, {
+    desc = "Git lens",
 })
-map("n", "<leader>gd", "<cmd>Git diff<CR>", {
+map("n", "<leader>gsb", "<cmd>Gitsigns stage_buffer<CR>", {
+    desc = "Git stage buffer",
+})
+map("n", "<leader>gsB", "<cmd>Gitsigns reset_hunk<CR>", {
+    desc = "Git unstage buffer",
+})
+map("n", "<leader>gsh", "<cmd>Gitsigns stage_hunk<CR>", {
+    desc = "Git stage hunk",
+})
+map("n", "<leader>gsH", "<cmd>Gitsigns undo_stage_hunk<CR>", {
+    desc = "Git unstage hunk",
+})
+map("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>", {
     desc = "Git diff",
 })
 map("n", "<leader>gl", "<cmd>Git log<CR>", {
     desc = "Git log",
-})
-map("n", "<leader>gS", "<cmd>Git stash<CR>", {
-    desc = "Git stash",
-})
-map("n", "<leader>gR", "<cmd>Git restore<CR>", {
-    desc = "Git restore",
 })
 
 -- telescope
