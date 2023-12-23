@@ -1,33 +1,25 @@
+local map = require("utils").map
+
 return {
     "mfussenegger/nvim-dap",
     config = function()
         -- keymaps
-        local function map(mode, lhs, rhs, opts)
-            local options = {
-                noremap = true,
-                silent = true,
-            }
-            if opts then
-                options = vim.tbl_extend("force", options, opts)
-            end
-            vim.keymap.set(mode, lhs, rhs, options)
-        end
-        map("n", "<leader>dc", "<cmd>DapContinue<cr>", {
+        map("n", "<f5>", "<cmd>DapContinue<cr>", {
             desc = "Continue",
         })
-        map("n", "<leader>dr", "<cmd>DapRestart<cr>", {
+        map("n", "<f17>", "<cmd>DapTerminate<cr>", {
             desc = "Restart",
         })
-        map("n", "<leader>do", "<cmd>DapStepOver<cr>", {
+        map("n", "<f10>", "<cmd>DapStepOver<cr>", {
             desc = "Step Over",
         })
-        map("n", "<leader>di", "<cmd>DapStepInto<cr>", {
+        map("n", "<f11>", "<cmd>DapStepInto<cr>", {
             desc = "Step Into",
         })
-        map("n", "<leader>dI", "<cmd>DapStepOut<cr>", {
+        map("n", "<f23>", "<cmd>DapStepOut<cr>", {
             desc = "Step Out",
         })
-        map("n", "<leader>db", "<cmd>DapToggleBreakpoint<cr>", {
+        map("n", "<f9>", "<cmd>DapToggleBreakpoint<cr>", {
             desc = "Toggle Breakpoint",
         })
     end,
