@@ -1,5 +1,11 @@
 # Neovim config
 
+<a href="https://dotfyle.com/Frank-Mayer/nvim"><img src="https://dotfyle.com/Frank-Mayer/nvim/badges/plugins?style=flat" /></a>
+
+<a href="https://dotfyle.com/Frank-Mayer/nvim"><img src="https://dotfyle.com/Frank-Mayer/nvim/badges/leaderkey?style=flat" /></a>
+
+<a href="https://dotfyle.com/Frank-Mayer/nvim"><img src="https://dotfyle.com/Frank-Mayer/nvim/badges/plugin-manager?style=flat" /></a>
+
 ## Required software
 
 -   [make](https://www.gnu.org/software/make/)
@@ -20,9 +26,8 @@
 
 -   [TypeScript](https://www.typescriptlang.org/)
 -   [Astro](https://astro.build/)
+-   [Tailwind CSS](https://tailwindcss.com/)
 -   [Lua](https://www.lua.org/)
--   [Python](https://www.python.org/)
 -   [Go](https://go.dev/)
 -   Java
 -   C
--   C++
