@@ -22,6 +22,7 @@ return {
                     end,
                     "lsp_progress",
                 },
+                lualine_x = {},
                 lualine_y = {
                     "encoding",
                     "fileformat",
