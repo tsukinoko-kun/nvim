@@ -51,6 +51,11 @@ local on_attach_default = function(client, bufnr)
         map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
         map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
     end
+
+    -- go specific keymaps (e.g. rename file and update imports)
+    if client.name == "gopls" then
+        require("core.format").set_format_on_save(true)
+    end
 end
 
 return {
@@ -148,7 +153,7 @@ return {
                     "jdtls", -- java
                 },
                 -- auto-install configured servers (with lspconfig)
-                automatic_installation = true, -- not the same as ensure_installed
+                automatic_installation = true, -- not the same as :ensure_installed
             })
         end,
     },
