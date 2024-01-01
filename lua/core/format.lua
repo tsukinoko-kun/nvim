@@ -2,12 +2,7 @@ local auto_format_active = false
 
 local format = function()
     vim.cmd("silent! write")
-    local conform = require("conform")
-    pcall(conform.format, {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-    })
+    vim.lsp.buf.format({ timeout_ms = 2000 })
     vim.cmd("silent! write")
 end
 

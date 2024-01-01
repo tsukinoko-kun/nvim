@@ -361,18 +361,9 @@ map("n", "<c-w>%", "<cmd>vsplit<CR>", {
 
 -- Format
 map({ "n", "v" }, "<leader>F", function()
-    require("conform").format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-    })
+    vim.lsp.buf.format({ timeout_ms = 2000 })
 end, {
     desc = "Format buffer",
-})
-map("n", "<leader>L", function()
-    require("lint").try_lint()
-end, {
-    desc = "Lint buffer",
 })
 
 -- Prime
