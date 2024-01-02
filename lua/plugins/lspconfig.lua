@@ -15,11 +15,6 @@ local on_attach_default = function(client, bufnr)
         vim.lsp.inlay_hint.enable(bufnr, true)
     end
 
-    if client.name ~= "null-ls" then
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-    end
-
     local function map(mode, lhs, rhs, opts)
         if rhs == nil then
             print("No rhs for " .. opts.desc)
