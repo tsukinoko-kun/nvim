@@ -8,7 +8,6 @@ return {
     {
         "stevearc/dressing.nvim",
         opts = {},
-        event = "VeryLazy",
     },
     "kkharji/sqlite.lua", -- sqlite3 for lua
     "ericbn/vim-relativize", -- relative line numbers

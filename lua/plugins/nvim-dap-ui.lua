@@ -2,7 +2,7 @@ local mouse = vim.opt.mouse
 
 return {
     "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
+    lazy = true,
     dependencies = {
         "mfussenegger/nvim-dap",
         "theHamsta/nvim-dap-virtual-text",

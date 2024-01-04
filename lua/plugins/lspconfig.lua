@@ -66,6 +66,7 @@ return {
 
     {
         "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
+        ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
         },
