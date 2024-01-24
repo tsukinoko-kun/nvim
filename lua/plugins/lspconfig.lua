@@ -190,6 +190,9 @@ return {
                 settings = {
                     -- custom settings for lua
                     Lua = {
+                        runtime = {
+                            version = "LuaJIT",
+                        },
                         hint = {
                             enable = true,
                         },
@@ -198,8 +201,10 @@ return {
                             globals = { "vim", "Yab" },
                         },
                         workspace = {
+                            checkThirdParty = false, -- disable checking for third party libraries
                             -- make language server aware of runtime files
                             library = {
+                                vim.env.VIMRUNTIME,
                                 vim.fn.expand("$VIMRUNTIME/lua"),
                                 vim.fn.stdpath("config") .. "/lua",
                                 vim.fn.expand("$XDG_CONFIG_HOME/yab/lib"),

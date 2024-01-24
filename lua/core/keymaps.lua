@@ -224,7 +224,7 @@ map("n", "<leader>T", require("trouble").toggle, { desc = "Toggle trouble list" 
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
     desc = "LazyGit",
 })
-map("n", "<leader>gp", "<cmd>Git pull<CR>", {
+map("n", "<leader>gp", "<cmd>Git stash<CR><cmd>Git pull<CR><cmd>Git stash pop<CR>", {
     desc = "Git pull",
 })
 map("n", "<leader>gb", "<cmd>Git branch<CR>", {

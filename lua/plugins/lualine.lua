@@ -40,7 +40,7 @@ return {
                     icon_only = false,
                 },
             },
-            lualine_z = { "location" },
+            lualine_z = { "progress" },
         },
         options = {
             theme = "catppuccin",
