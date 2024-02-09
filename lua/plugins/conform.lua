@@ -18,6 +18,7 @@ return {
             rust = { { "rustfmt", "rustfmt-nightly" } },
             python = { "black" },
             go = { "gofmt" },
+            templ = { "templ" },
         },
     },
 }

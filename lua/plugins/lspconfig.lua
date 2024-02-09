@@ -1,4 +1,4 @@
-local setup_lsp = { "lua_ls", "gopls", "jdtls", "tsserver", "astro", "tailwindcss", "ccls" }
+local setup_lsp = { "lua_ls", "gopls", "htmx", "jdtls", "tsserver", "astro", "tailwindcss", "ccls" }
 
 local function has_value(tab, val)
     for _, value in ipairs(tab) do
@@ -143,6 +143,8 @@ return {
                     "astro", -- astro
                     "tsserver", -- ts/js
                     "gopls", -- go
+                    "templ", -- html templating
+                    "htmx", -- htmx
                     "html", -- html
                     "cssls", -- css, scss, less
                     "tailwindcss", -- tailwind
@@ -156,6 +158,7 @@ return {
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as :ensure_installed
             })
+            vim.filetype.add({ extension = { templ = "templ" } })
         end,
     },
 
@@ -239,6 +242,12 @@ return {
                 },
             })
 
+            lspconfig.htmx.setup({
+                on_attach = on_attach_default,
+                capabilities = capabilities,
+                filetypes = { "html", "templ" },
+            })
+
             lspconfig.jdtls.setup({
                 capabilities = capabilities,
                 on_attach = on_attach_default,
@@ -310,7 +319,8 @@ return {
             lspconfig["tailwindcss"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach_default,
-                filetypes = { "astro", "html", "javascriptreact", "typescriptreact", "svelte" },
+                filetypes = { "astro", "templ", "html", "javascriptreact", "typescriptreact", "svelte" },
+                init_options = { userLanguages = { templ = "html" } },
                 settings = {
                     tailwindCSS = {
                         files = {
