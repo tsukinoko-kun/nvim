@@ -3,8 +3,6 @@ return {
     "nvim-lua/popup.nvim",
 
     -- My plugins here
-
-    "github/copilot.vim",
     {
         "stevearc/dressing.nvim",
         opts = {},
