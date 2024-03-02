@@ -141,6 +141,7 @@ return {
                 -- list of servers for mason to install
                 ensure_installed = {
                     "astro", -- astro
+                    "svelte", -- svelte
                     "tsserver", -- ts/js
                     "gopls", -- go
                     "templ", -- html templating
