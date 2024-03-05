@@ -1,4 +1,4 @@
-local setup_lsp = { "lua_ls", "gopls", "htmx", "jdtls", "tsserver", "astro", "tailwindcss", "ccls" }
+local setup_lsp = { "lua_ls", "gopls", "htmx", "jdtls", "astro", "tailwindcss", "ccls" }
 
 local function has_value(tab, val)
     for _, value in ipairs(tab) do
@@ -46,10 +46,11 @@ local on_attach_default = function(client, bufnr)
     map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 
     -- typescript specific keymaps (e.g. rename file and update imports)
-    if client.name == "tsserver" then
+    if client.name == "typescript-tools" then
         map("n", "<leader>lrf", ":TypescriptRenameFile<CR>", { desc = "Rename file and update imports" })
         map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
         map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
+        map("n", "gd", ":TSToolsGoToSourceDefinition<CR>", { desc = "Go to source definition" })
     end
 
     -- go specific keymaps (e.g. rename file and update imports)
@@ -65,61 +66,25 @@ return {
     },
 
     {
-        "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
+        "pmizio/typescript-tools.nvim",
         ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {
+            on_attach = on_attach_default,
+            settings = {
+                publish_diagnostic_on = "change",
+                tsserver_locale = "en",
+                tsserver_file_preferences = {
+                    includeInlayParameterNameHints = "all",
+                    includeCompletionsForModuleExports = true,
+                    quotePreference = "auto",
+                },
+                tsserver_format_options = {
+                    allowIncompleteCompletions = false,
+                    allowRenameOfImportPath = false,
+                },
+            },
         },
-        config = function()
-            require("typescript").setup({
-                disable_commands = false, -- prevent the plugin from creating Vim commands
-                debug = false, -- enable debug logging for commands
-                go_to_source_definition = {
-                    fallback = true, -- fall back to standard LSP definition on failure
-                },
-                server = {
-                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-                    on_attach = on_attach_default,
-                    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-                    init_options = {
-                        preferences = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
-                            importModuleSpecifierPreference = "non-relative",
-                        },
-                    },
-                    settings = {
-                        typescript = {
-                            inlayHints = {
-                                includeInlayParameterNameHints = "all",
-                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                includeInlayFunctionParameterTypeHints = true,
-                                includeInlayVariableTypeHints = true,
-                                includeInlayPropertyDeclarationTypeHints = true,
-                                includeInlayFunctionLikeReturnTypeHints = true,
-                                includeInlayEnumMemberValueHints = true,
-                            },
-                        },
-                        javascript = {
-                            inlayHints = {
-                                includeInlayParameterNameHints = "all",
-                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                includeInlayFunctionParameterTypeHints = true,
-                                includeInlayVariableTypeHints = true,
-                                includeInlayPropertyDeclarationTypeHints = true,
-                                includeInlayFunctionLikeReturnTypeHints = true,
-                                includeInlayEnumMemberValueHints = true,
-                            },
-                        },
-                    },
-                },
-            })
-        end,
     },
 
     {
@@ -142,7 +107,6 @@ return {
                 ensure_installed = {
                     "astro", -- astro
                     "svelte", -- svelte
-                    "tsserver", -- ts/js
                     "gopls", -- go
                     "templ", -- html templating
                     "htmx", -- htmx
@@ -326,36 +290,6 @@ return {
                     tailwindCSS = {
                         files = {
                             exclude = { "node_modules", ".git", "dist", "build", ".cache", ".next" },
-                        },
-                    },
-                },
-            })
-
-            lspconfig.tsserver.setup({
-                capabilities = capabilities,
-                on_attach = on_attach_default,
-                filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-                javascript = {
-                    javascript = {
-                        inlayHints = {
-                            includeInlayEnumMemberValueHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                        },
-                    },
-                    typescript = {
-                        inlayHints = {
-                            includeInlayEnumMemberValueHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayVariableTypeHints = true,
                         },
                     },
                 },
