@@ -50,7 +50,7 @@ local on_attach_default = function(client, bufnr)
         map("n", "<leader>lrf", ":TypescriptRenameFile<CR>", { desc = "Rename file and update imports" })
         map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
         map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
-        map("n", "gd", ":TSToolsGoToSourceDefinition<CR>", { desc = "Go to source definition" })
+        map("n", "gs", ":TSToolsGoToSourceDefinition<CR>", { desc = "Go to source definition" })
     end
 
     -- go specific keymaps (e.g. rename file and update imports)
