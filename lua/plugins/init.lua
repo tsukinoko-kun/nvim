@@ -46,6 +46,7 @@ return {
         config = true,
     }, -- markdown preview
     -- git integration
+    "ThePrimeagen/git-worktree.nvim", -- git worktree integration
     "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
     "tpope/vim-fugitive", -- git commands in vim
     "kdheepak/lazygit.nvim", -- lazygit in vim

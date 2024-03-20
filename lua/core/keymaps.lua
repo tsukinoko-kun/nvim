@@ -221,6 +221,12 @@ map("n", "-", require("oil").open, { desc = "Open parent directory" })
 map("n", "<leader>T", require("trouble").toggle, { desc = "Toggle trouble list" })
 
 -- git
+map("n", "<leader>fg", require('telescope').extensions.git_worktree.git_worktrees, {
+    desc = "Fuzzy search git worktrees",
+})
+map("n", "<leader>fG", require('telescope').extensions.git_worktree.create_git_worktree, {
+    desc = "Create git worktree",
+})
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
     desc = "LazyGit",
 })

@@ -43,5 +43,6 @@ return {
         telescope.load_extension("harpoon")
         telescope.load_extension("zoxide")
         telescope.load_extension("neoclip")
+        telescope.load_extension("git_worktree")
     end,
 }
