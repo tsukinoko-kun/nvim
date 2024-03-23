@@ -15,6 +15,9 @@ require("core.colorscheme")
 require("core.format")
 
 -- clear jump list autocmd VimEnter
-vim.cmd([[
-    autocmd VimEnter * :clearjumps
-]])
+vim.cmd("autocmd VimEnter * :clearjumps")
+
+vim.cmd("highlight Normal guibg=none")
+vim.cmd("highlight NonText guibg=none")
+vim.cmd("highlight Normal ctermbg=none")
+vim.cmd("highlight NonText ctermbg=none")
