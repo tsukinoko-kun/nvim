@@ -1,9 +1,7 @@
 -- set language
-if not pcall(function()
+pcall(function()
     vim.cmd("lang en_US.UTF-8")
-end) then
-    print("Failed to set locale")
-end
+end)
 
 vim.opt.termguicolors = true
 vim.g.mapleader = " "

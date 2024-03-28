@@ -14,6 +14,7 @@ return {
             mini = false,
             harpoon = true,
             mason = true,
+            which_key = true,
         },
     },
 }
