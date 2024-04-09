@@ -47,9 +47,9 @@ local on_attach_default = function(client, bufnr)
 
     -- typescript specific keymaps (e.g. rename file and update imports)
     if client.name == "typescript-tools" then
-        map("n", "<leader>lrf", ":TypescriptRenameFile<CR>", { desc = "Rename file and update imports" })
-        map("n", "<leader>loi", ":TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
-        map("n", "<leader>lru", ":TypescriptRemoveUnused<CR>", { desc = "Remove unused imports" })
+        map("n", "<leader>lrf", ":TSToolsRenameFile<CR>", { desc = "Rename file and update imports" })
+        map("n", "<leader>loi", ":TSToolsOrganizeImports<CR>", { desc = "Organize imports" })
+        map("n", "<leader>lru", ":TSToolsRemoveUnused<CR>", { desc = "Remove unused imports" })
         map("n", "gs", ":TSToolsGoToSourceDefinition<CR>", { desc = "Go to source definition" })
     end
 
