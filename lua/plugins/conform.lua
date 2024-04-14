@@ -15,6 +15,7 @@ return {
             lua = { "stylua" },
             java = { "google-java-format" },
             cpp = { { "clang-format", "astyle" } },
+            c = { { "clang-format", "astyle" } },
             rust = { { "rustfmt", "rustfmt-nightly" } },
             python = { "black" },
             go = { "gofmt" },
