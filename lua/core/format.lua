@@ -1,4 +1,4 @@
-local auto_format_active = false
+local auto_format_active = true
 
 local format = function()
     vim.cmd("silent! write")
