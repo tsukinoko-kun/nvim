@@ -221,10 +221,10 @@ map("n", "-", require("oil").open, { desc = "Open parent directory" })
 map("n", "<leader>T", require("trouble").toggle, { desc = "Toggle trouble list" })
 
 -- git
-map("n", "<leader>fg", require('telescope').extensions.git_worktree.git_worktrees, {
+map("n", "<leader>fg", require("telescope").extensions.git_worktree.git_worktrees, {
     desc = "Fuzzy search git worktrees",
 })
-map("n", "<leader>fG", require('telescope').extensions.git_worktree.create_git_worktree, {
+map("n", "<leader>fG", require("telescope").extensions.git_worktree.create_git_worktree, {
     desc = "Create git worktree",
 })
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", {
@@ -399,6 +399,12 @@ map("n", "<C-d>", "<C-d>zz", {
 })
 map("n", "<C-u>", "<C-u>zz", {
     desc = "Scroll up",
+})
+map("n", "<C-j>", ":cnext<CR>", {
+    desc = "Next quickfix list item",
+})
+map("n", "<C-k>", ":cprevious<CR>", {
+    desc = "Previous quickfix list item",
 })
 
 map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", {
