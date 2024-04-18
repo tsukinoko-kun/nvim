@@ -25,10 +25,20 @@ return {
                     ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                 },
             },
-            file_ignore_patterns = {
-                "^.git/",
-                "^.cache/",
-                "^node_modules/",
+            defaults = {
+                file_ignore_patterns = {
+                    ".git/",
+                    ".cache",
+                    "%.o",
+                    "%.a",
+                    "%.out",
+                    "%.class",
+                    "%.pdf",
+                    "%.mkv",
+                    "%.mp4",
+                    "%.zip",
+                    "node%_modules/",
+                },
             },
             extensions = {
                 ["ui-select"] = {
