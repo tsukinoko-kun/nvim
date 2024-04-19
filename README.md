@@ -11,8 +11,9 @@
 - [make](https://www.gnu.org/software/make/)
 - unzip
 - [fzf](https://github.com/junegunn/fzf)
-- [Prettier](https://www.npmjs.com/package/prettier) (global) with [Astro plugin](https://github.com/withastro/prettier-plugin-astro)
+- [prettierd](https://github.com/fsouza/prettierd) (global) with [Astro plugin](https://github.com/withastro/prettier-plugin-astro)
 - true color terminal emulator like [WezTerm](https://wezfurlong.org/wezterm/), [Alacritty](https://alacritty.org), or [Kitty](https://sw.kovidgoyal.net/kitty/)
+- [eslint_d](https://github.com/mantoni/eslint_d.js)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
