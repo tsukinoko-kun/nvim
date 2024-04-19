@@ -12,7 +12,7 @@ end
 -- enable keybinds only for when lsp server available
 local on_attach_default = function(client, bufnr)
     if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true)
     end
 
     local function map(mode, lhs, rhs, opts)
