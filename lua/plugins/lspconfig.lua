@@ -119,11 +119,12 @@ return {
                     "yamlls", -- yaml
                     "lemminx", -- xml
                     "jdtls", -- java
+                    "csharp_ls", -- C#
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as :ensure_installed
             })
-            vim.filetype.add({ extension = { templ = "templ" } })
+            vim.filetype.add({ extension = { templ = "templ", razor = "razor", cshtml = "cshtml" } })
         end,
     },
 

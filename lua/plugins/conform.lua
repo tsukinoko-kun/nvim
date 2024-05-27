@@ -18,8 +18,9 @@ return {
             c = { { "clang-format", "astyle" } },
             rust = { { "rustfmt", "rustfmt-nightly" } },
             python = { "black" },
-            go = { "gofmt" },
+            go = { "goimports", "gofmt" },
             templ = { "templ" },
+            cs = { "csharpier" },
         },
     },
 }
