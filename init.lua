@@ -7,10 +7,10 @@ vim.opt.termguicolors = true
 vim.g.mapleader = " "
 
 require("plugins-setup")
-require("core.options")
 require("core.keymaps")
 require("core.colorscheme")
 require("core.format")
+require("core.options")
 
 -- clear jump list autocmd VimEnter
 vim.cmd("autocmd VimEnter * :clearjumps")
