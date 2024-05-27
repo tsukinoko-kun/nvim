@@ -34,7 +34,6 @@ opt.smartindent = true
 
 -- line wrapping
 opt.wrap = true
-opt.colorcolumn = "80"
 
 -- search
 opt.ignorecase = true
@@ -43,6 +42,11 @@ vim.cmd("set rtp+=/opt/homebrew/opt/fzf")
 
 -- cursor line
 opt.cursorline = true
+opt.cursorcolumn = true
+local lineHi = vim.api.nvim_get_hl(0, { name = "CursorLine" })
+local c = require("catppuccin.palettes.mocha")
+vim.api.nvim_set_hl(0, "CursorLine", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })
+vim.api.nvim_set_hl(0, "CursorColumn", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })
 
 -- scrolloff
 opt.scrolloff = 8
