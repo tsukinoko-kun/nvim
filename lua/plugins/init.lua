@@ -61,4 +61,7 @@ return {
             vim.cmd([[silent! GoInstallDeps]])
         end,
     },
+
+    -- TypeScript
+    { "dmmulroy/ts-error-translator.nvim" },
 }
