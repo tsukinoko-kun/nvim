@@ -35,7 +35,7 @@ function AutoForm()
             and biomeConf.javascript.globals ~= nil
             and table_has(biomeConf.javascript.globals, "Astro")
         then
-            table.insert(astro_format, "biome-check")
+            table_set(astro_format, "biome-check")
         end
     end
 
@@ -56,10 +56,10 @@ function AutoForm()
         or file_exists("prettier.config.cjs")
     then
         prettier_used = true
-        table.insert(js_format, "prettierd")
-        table.insert(json_format, "prettierd")
-        table.insert(css_format, "prettierd")
-        table.insert(astro_format, "prettierd")
+        table_set(js_format, "prettierd")
+        table_set(json_format, "prettierd")
+        table_set(css_format, "prettierd")
+        table_set(astro_format, "prettierd")
     end
 
     -- eslint
@@ -72,10 +72,10 @@ function AutoForm()
         or file_exists("eslint.config.cjs")
     then
         eslint_used = true
-        table.insert(js_format, "eslint_d")
-        table.insert(json_format, "eslint_d")
-        table.insert(css_format, "eslint_d")
-        table.insert(astro_format, "eslint_d")
+        table_set(js_format, "eslint_d")
+        table_set(json_format, "eslint_d")
+        table_set(css_format, "eslint_d")
+        table_set(astro_format, "eslint_d")
     end
 
     -- package.json
@@ -85,10 +85,10 @@ function AutoForm()
         io.close(packageJsonFile)
         local packageJson = vim.json.decode(packageJsonStr)
         if packageJson.prettier ~= nil then
-            table.insert(js_format, "prettierd")
-            table.insert(json_format, "prettierd")
-            table.insert(css_format, "prettierd")
-            table.insert(astro_format, "prettierd")
+            table_set(js_format, "prettierd")
+            table_set(json_format, "prettierd")
+            table_set(css_format, "prettierd")
+            table_set(astro_format, "prettierd")
         end
     end
 
