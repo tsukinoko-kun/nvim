@@ -120,6 +120,7 @@ return {
                     "lemminx", -- xml
                     "jdtls", -- java
                     "csharp_ls", -- C#
+                    "biome", -- JS Linter
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as :ensure_installed
