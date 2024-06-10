@@ -10,6 +10,7 @@ function AutoLint()
         yaml = { "yamllint" },
         json = { "jsonlint" },
         svelte = {},
+        astro = {},
         javascript = {},
         typescript = {},
         typescriptreact = {},
