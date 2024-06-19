@@ -71,6 +71,18 @@ return {
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         opts = {
             on_attach = on_attach_default,
+            root_dir = function(fname)
+                local util = require("lspconfig.util")
+                return util.root_pattern(
+                    "turbo.json",
+                    "docker-compose.yml",
+                    ".eslintrc.cjs",
+                    "pnpm-workspace.yaml",
+                    "pnpm-lock.yaml"
+                )(fname) or util.root_pattern("package.json", ".git")(fname) or util.find_git_ancestor(
+                    fname
+                )
+            end,
             settings = {
                 publish_diagnostic_on = "change",
                 tsserver_locale = "en",

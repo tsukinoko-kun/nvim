@@ -20,8 +20,9 @@ function AutoForm()
 
         if biomeConf.linter ~= nil and biomeConf.linter.enabled == true then
             table_set(js_format, "biome-check")
-            table_set(css_format, "biome-check")
+            table_set(css_format, "biome")
             table_set(json_format, "biome-check")
+            table_set(astro_format, "biome-check")
         elseif biomeConf.javascript ~= nil and biomeConf.javascript.linter then
             table_set(js_format, "biome-check")
         elseif biomeConf.json ~= nil and biomeConf.json.linter then
@@ -56,10 +57,10 @@ function AutoForm()
         or file_exists("prettier.config.cjs")
     then
         prettier_used = true
-        table_set(js_format, "prettierd")
-        table_set(json_format, "prettierd")
-        table_set(css_format, "prettierd")
-        table_set(astro_format, "prettierd")
+        table_set(js_format, "prettier")
+        table_set(json_format, "prettier")
+        table_set(css_format, "prettier")
+        table_set(astro_format, "prettier")
     end
 
     -- eslint
@@ -72,10 +73,10 @@ function AutoForm()
         or file_exists("eslint.config.cjs")
     then
         eslint_used = true
-        table_set(js_format, "eslint_d")
-        table_set(json_format, "eslint_d")
-        table_set(css_format, "eslint_d")
-        table_set(astro_format, "eslint_d")
+        table_set(js_format, "eslint")
+        table_set(json_format, "eslint")
+        table_set(css_format, "eslint")
+        table_set(astro_format, "eslint")
     end
 
     -- package.json
@@ -85,23 +86,23 @@ function AutoForm()
         io.close(packageJsonFile)
         local packageJson = vim.json.decode(packageJsonStr)
         if packageJson.prettier ~= nil then
-            table_set(js_format, "prettierd")
-            table_set(json_format, "prettierd")
-            table_set(css_format, "prettierd")
-            table_set(astro_format, "prettierd")
+            table_set(js_format, "prettier")
+            table_set(json_format, "prettier")
+            table_set(css_format, "prettier")
+            table_set(astro_format, "prettier")
         end
     end
 
     local def = {}
 
     if prettier_used then
-        table_set(def, "prettierd")
+        table_set(def, "prettier")
     else
         table_set(def, "prettier")
     end
 
     if eslint_used then
-        table_set(def, "eslint_d")
+        table_set(def, "eslint")
     else
         table_set(def, "eslint")
     end
