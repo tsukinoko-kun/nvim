@@ -6,7 +6,7 @@ function AutoForm()
     local js_format = {}
     local css_format = {}
     local json_format = {}
-    local astro_format = {}
+    local astro_format = { "rustywind" }
 
     local prettier_used = false
     local eslint_used = false
@@ -93,7 +93,7 @@ function AutoForm()
         end
     end
 
-    local def = {}
+    local def = { "rustywind" }
 
     if prettier_used then
         table_set(def, "prettier")
