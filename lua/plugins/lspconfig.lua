@@ -138,7 +138,9 @@ return {
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as :ensure_installed
             })
-            vim.filetype.add({ extension = { templ = "templ", razor = "razor", cshtml = "cshtml" } })
+            vim.filetype.add({
+                extension = { templ = "templ", razor = "razor", cshtml = "cshtml" },
+            })
         end,
     },
 
@@ -329,6 +331,13 @@ return {
                 },
                 capabilities = capabilities,
                 on_attach = on_attach_default,
+            })
+
+            lspconfig.typst_lsp.setup({
+                settings = {
+                    exportPdf = "onType", -- Choose onType, onSave or never.
+                    -- serverPath = "" -- Normally, there is no need to uncomment it.
+                },
             })
         end,
     },

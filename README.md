@@ -30,5 +30,8 @@
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Lua](https://www.lua.org/)
 - [Go](https://go.dev/)
+- [Rust](https://www.rust-lang.org/)
 - Java
 - C
+- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+- Typst
