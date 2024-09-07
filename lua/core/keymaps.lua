@@ -1,26 +1,31 @@
 local map = require("utils").map
 
+map(
+    { "n", "v" },
+    "<Up>",
+    "v:count == 0 ? 'gk' : 'k'",
+    { expr = true, silent = true, noremap = true, desc = "Move up (smart)" }
+)
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, noremap = true, desc = "Move up (smart)" })
+
+map(
+    { "n", "v" },
+    "<Down>",
+    "v:count == 0 ? 'gj' : 'j'",
+    { expr = true, silent = true, noremap = true, desc = "Move down (smart)" }
+)
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, noremap = true, desc = "Move down (smart)" })
+
 -- remove highlight on escape (additionally to default <esc> behaviour)
 map("n", "<esc>", "<cmd>noh<cr><esc>")
 
-map("i", "<C-s>", "<cmd>wa!<CR>", {
+map({ "n", "i", "v" }, "<C-s>", "<cmd>wa<CR>", {
     desc = "Write all buffers",
 })
-map("n", "<C-s>", "<cmd>wa!<CR>", {
-    desc = "Write all buffers",
-})
-map("i", "<C-Q>", "<cmd>qa<CR>", {
+map({ "n", "i" }, "<C-q>", "<cmd>q<CR>", {
     desc = "Quit all buffers",
 })
-map("n", "<C-Q>", "<cmd>qa<CR>", {
-    desc = "Quit all buffers",
-})
-map("i", "<C-q>", "<cmd>q<CR>", {
-    desc = "Quit all buffers",
-})
-map("n", "<C-q>", "<cmd>q<CR>", {
-    desc = "Quit all buffers",
-})
+
 map("v", "d", '"_x"<esc>', {
     desc = "Delete without yanking",
 })
@@ -409,4 +414,44 @@ map("n", "<C-k>", ":cprevious<CR>", {
 
 map("n", "<leader>s", "<cmd>SymbolsOutline<CR>", {
     desc = "LSP symbols",
+})
+
+-- spellcheck
+map("n", "<leader>ct", function()
+    vim.opt.spell = not vim.opt.spell
+end, {
+    desc = "Toggle spellcheck",
+})
+map("n", "<leader>cd", function()
+    require("telescope.builtin").spell_suggest()
+end, {
+    desc = "Select spellcheck suggestion",
+})
+-- use telescope to select language
+map("n", "<leader>cl", function()
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local conf = require("telescope.config").values
+
+    local opts = {
+        prompt_title = "Select Spellcheck Language",
+        finder = finders.new_table({
+            results = { "en_us", "de_de" },
+        }),
+        sorter = conf.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+                actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                vim.opt.spelllang = selection[1]
+                print("Spellcheck language set to: " .. selection[1])
+            end)
+            return true
+        end,
+    }
+    pickers.new({}, opts):find()
+end, {
+    desc = "Select spellcheck language",
 })

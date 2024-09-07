@@ -17,6 +17,10 @@ vim.cmd("set showcmd")
 -- disable mouse
 -- opt.mouse = ""
 
+-- spell check
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"
+
 -- timeout
 opt.timeoutlen = 500
 opt.timeout = true
