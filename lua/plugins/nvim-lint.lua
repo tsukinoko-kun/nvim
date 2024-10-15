@@ -118,7 +118,7 @@ local go_escape_analysis = {
     env = nil,
     parser = function(output, bufnr)
         local diagnostics = {}
-        local words = { "moved", "escapes", "heap", "stack", "inlining" }
+        local words = { "moved", "escapes", "heap", "stack" }
         local current_file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":p")
 
         for _, line in ipairs(vim.split(output, "\n")) do
