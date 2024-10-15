@@ -167,6 +167,9 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
+            -- gleam language server
+            lspconfig.gleam.setup({})
+
             -- configure lua server (with special settings)
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,

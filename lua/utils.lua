@@ -36,9 +36,20 @@ local function file_exists(name)
     end
 end
 
+local function includes_one_of(str, list)
+    for _, value in ipairs(list) do
+        if string.find(str, value) then
+            return true
+        end
+    end
+
+    return false
+end
+
 return {
     map = map,
     table_has = table_has,
     table_set = table_set,
     file_exists = file_exists,
+    includes_one_of = includes_one_of,
 }
