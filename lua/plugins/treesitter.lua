@@ -13,6 +13,8 @@ return {
     -- configure treesitter
     config = function()
         local ts = require("nvim-treesitter.configs")
+        local parsers = require("nvim-treesitter.parsers")
+
         ts.setup({
             textobjects = {
                 select = {
@@ -62,6 +64,7 @@ return {
             -- enable syntax highlighting
             highlight = {
                 enable = true,
+                disable = { "markdown" },
             },
             -- enable indentation
             indent = { enable = true },

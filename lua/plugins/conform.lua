@@ -110,6 +110,8 @@ function AutoForm()
     local formatters_by_ft = {
         astro = astro_format,
         javascript = js_format,
+        typ = { "typstyle" },
+        typst = { "typstyle" },
         typescript = js_format,
         typescriptreact = js_format,
         json = json_format,
@@ -127,6 +129,7 @@ function AutoForm()
         go = { "goimports", "gofmt" },
         templ = { "templ" },
         cs = { "csharpier" },
+        nix = { "nixfmt" },
     }
 
     return formatters_by_ft

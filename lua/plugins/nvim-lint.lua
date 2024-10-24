@@ -6,7 +6,7 @@ function AutoLint()
     local linters_by_ft = {
         lua = { "luacheck" },
         sh = { "shellcheck" },
-        markdown = { "markdownlint" },
+        -- markdown = { "markdownlint" },
         yaml = { "yamllint" },
         json = { "jsonlint" },
         svelte = {},
@@ -22,6 +22,7 @@ function AutoLint()
         less = { "stylelint" },
         go = { "golangcilint", "go_escape_analysis" },
         c = { "cppcheck" },
+        nix = { "nix" },
         cpp = { "cppcheck" },
         objc = { "cppcheck" },
         java = { "checkstyle" },
