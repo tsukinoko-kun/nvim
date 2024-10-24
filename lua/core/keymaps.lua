@@ -221,6 +221,44 @@ vim.keymap.set("n", "da", '"_da')
 vim.keymap.set("n", "dg", '"_dg')
 vim.keymap.set("n", "di", '"_di')
 
+-- tabs
+map("n", "<c-t>", "<cmd>tabnew<cr>", {
+    desc = "New tab",
+})
+map("n", "<c-1>", ":tabn 1<CR>", {
+    desc = "Tab 1",
+})
+map("n", "<c-2>", ":tabn 2<CR>", {
+    desc = "Tab 2",
+})
+map("n", "<c-3>", ":tabn 3<CR>", {
+    desc = "Tab 3",
+})
+map("n", "<c-4>", ":tabn 4<CR>", {
+    desc = "Tab 4",
+})
+map("n", "<c-5>", ":tabn 5<CR>", {
+    desc = "Tab 5",
+})
+map("n", "<c-6>", ":tabn 6<CR>", {
+    desc = "Tab 6",
+})
+map("n", "<c-7>", ":tabn 7<CR>", {
+    desc = "Tab 7",
+})
+map("n", "<c-8>", ":tabn 8<CR>", {
+    desc = "Tab 8",
+})
+map("n", "<c-9>", ":tabn 9<CR>", {
+    desc = "Tab 9",
+})
+map("n", "<c-0>", ":tabn 10<CR>", {
+    desc = "Tab 10",
+})
+map("n", "<c-w>", "<cmd>tabclose<cr>", {
+    desc = "Close tab",
+})
+
 -- explorer
 map("n", "-", require("oil").open, { desc = "Open parent directory" })
 map("n", "<leader>T", require("trouble").toggle, { desc = "Toggle trouble list" })
