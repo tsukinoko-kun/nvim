@@ -65,7 +65,7 @@ opt.termguicolors = true
 opt.backspace = "indent,eol,start"
 
 -- clipboard
-opt.clipboard:append("unnamedplus")
+opt.clipboard:append({ "unnamed", "unnamedplus" })
 
 -- split windows
 opt.splitright = true

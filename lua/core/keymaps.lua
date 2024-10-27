@@ -1,5 +1,18 @@
 local map = require("utils").map
 
+vim.g.clipboard = {
+    name = "macOS clipboard",
+    copy = {
+        ["+"] = "pbcopy",
+        ["*"] = "pbcopy",
+    },
+    paste = {
+        ["+"] = "pbpaste",
+        ["*"] = "pbpaste",
+    },
+    cache_enabled = 0,
+}
+
 map(
     { "n", "v" },
     "<Up>",
