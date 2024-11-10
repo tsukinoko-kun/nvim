@@ -22,5 +22,8 @@ return {
         map("n", "<f9>", "<cmd>DapToggleBreakpoint<cr>", {
             desc = "Toggle Breakpoint",
         })
+        map("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", {
+            desc = "Toggle DAP UI",
+        })
     end,
 }
