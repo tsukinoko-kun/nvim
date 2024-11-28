@@ -8,7 +8,6 @@ vim.g.mapleader = " "
 
 require("plugins-setup")
 require("core.keymaps")
-require("core.colorscheme")
 require("core.format")
 require("core.options")
 
@@ -19,3 +18,12 @@ vim.cmd("highlight Normal guibg=none")
 vim.cmd("highlight NonText guibg=none")
 vim.cmd("highlight Normal ctermbg=none")
 vim.cmd("highlight NonText ctermbg=none")
+
+vim.cmd.colorscheme(require("utils").get_appearance_mode() == "dark" and "catppuccin-mocha" or "catppuccin-latte")
+
+local lineHi = vim.api.nvim_get_hl(0, { name = "CursorLine" })
+local c = require(
+    require("utils").get_appearance_mode() == "dark" and "catppuccin.palettes.mocha" or "catppuccin.palettes.latte"
+)
+vim.api.nvim_set_hl(0, "CursorLine", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })
+vim.api.nvim_set_hl(0, "CursorColumn", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })

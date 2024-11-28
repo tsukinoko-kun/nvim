@@ -3,7 +3,7 @@ local opt = vim.opt
 opt.hidden = true -- Enable background buffers
 opt.history = 100 -- Remember N lines in history
 opt.lazyredraw = true -- Faster scrolling
---opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.synmaxcol = 240 -- Max column for syntax highlight
 opt.updatetime = 700 -- ms to wait for trigger an event
 
 vim.o.completeopt = "menuone,noinsert,noselect"
@@ -47,10 +47,6 @@ vim.cmd("set rtp+=/opt/homebrew/opt/fzf")
 -- cursor line
 opt.cursorline = true
 opt.cursorcolumn = true
-local lineHi = vim.api.nvim_get_hl(0, { name = "CursorLine" })
-local c = require("catppuccin.palettes.mocha")
-vim.api.nvim_set_hl(0, "CursorLine", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })
-vim.api.nvim_set_hl(0, "CursorColumn", { fg = lineHi.fg, bg = c.mantle, sp = lineHi.sp, nocombine = lineHi.nocombine })
 
 -- scrolloff
 opt.scrolloff = 8
