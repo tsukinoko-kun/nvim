@@ -1,0 +1,4 @@
+return {
+    "lilydjwg/colorizer",
+    opt = {},
+}

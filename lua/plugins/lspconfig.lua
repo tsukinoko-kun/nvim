@@ -304,7 +304,7 @@ return {
             lspconfig["tailwindcss"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach_default,
-                filetypes = { "astro", "templ", "html", "javascriptreact", "typescriptreact", "svelte" },
+                filetypes = { "astro", "templ", "html", "javascriptreact", "typescriptreact", "svelte", "eruby" },
                 init_options = { userLanguages = { templ = "html" } },
                 settings = {
                     tailwindCSS = {
