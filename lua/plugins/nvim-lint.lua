@@ -25,7 +25,7 @@ function AutoLint()
         nix = { "nix" },
         cpp = { "cppcheck" },
         objc = { "cppcheck" },
-        java = { "checkstyle" },
+        -- java = { "checkstyle" },
     }
 
     -- biome
