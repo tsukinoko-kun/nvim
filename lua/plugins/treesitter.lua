@@ -15,6 +15,9 @@ return {
         local ts = require("nvim-treesitter.configs")
         local parsers = require("nvim-treesitter.parsers")
 
+        vim.opt.autoindent = true
+        vim.opt.smartindent = true
+
         ts.setup({
             textobjects = {
                 select = {
@@ -66,8 +69,8 @@ return {
                 enable = true,
                 disable = { "markdown" },
             },
-            -- enable indentation
-            indent = { enable = true },
+            -- disable indentation
+            indent = { enable = false },
             -- enable autotagging (w/ nvim-ts-autotag plugin)
             autotag = { enable = true },
             -- ensure these language parsers are installed
